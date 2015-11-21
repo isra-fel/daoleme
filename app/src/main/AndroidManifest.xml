@@ -1,0 +1,28 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="cn.edu.fudan.daoleme">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application android:name=".DLMApplication"
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:theme="@style/AppTheme">
+
+        <!-- application entrance -->
+        <activity android:name=".module.HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".module.SettingActivity"/>
+        <activity android:name=".module.AboutActivity"/>
+        <activity android:name=".module.LoginActivity"/>
+        <activity android:name=".module.RegisterActivity"/>
+        <activity android:name=".module.ExpressDetailActivity"/>
+        <activity android:name=".module.MyExpressActivity"/>
+
+    </application>
+
+</manifest>
