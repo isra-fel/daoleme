@@ -24,9 +24,9 @@ public class HomeActivity extends AppCompatActivity implements
         ViewPager.OnPageChangeListener {
     private static final String TAG = "HomeActivity";
 
-    private ViewGroup mTabMail, mTabExpress, mTabMe;
+    private ViewGroup mTabReceive, mTabSend, mTabMe;
     private ViewPager mPager;
-    private int mCurrentTabIndex; // start from 0, 0->mTabMail, 1->mTabExpress, 2->mTabMe
+    private int mCurrentTabIndex; // start from 0, 0->mTabReceive, 1->mTabSend, 2->mTabMe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,12 +39,12 @@ public class HomeActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // add listener to tabs
-        mTabMail = (ViewGroup)findViewById(R.id.tab_receive);
-        mTabExpress = (ViewGroup)findViewById(R.id.tab_send);
+        // listen to click events
+        mTabReceive = (ViewGroup)findViewById(R.id.tab_receive);
+        mTabSend = (ViewGroup)findViewById(R.id.tab_send);
         mTabMe = (ViewGroup)findViewById(R.id.tab_me);
-        mTabMail.setOnClickListener(this);
-        mTabExpress.setOnClickListener(this);
+        mTabReceive.setOnClickListener(this);
+        mTabSend.setOnClickListener(this);
         mTabMe.setOnClickListener(this);
 
         // set view pagers and pageChangeListener
@@ -60,28 +60,28 @@ public class HomeActivity extends AppCompatActivity implements
 
     }
 
-    private void onSwitchTab(int tabIndex) {
-        Log.d(TAG, "onSwitchTab, " + tabIndex);
+    private void setCurrentTab(int tabIndex) {
+        Log.d(TAG, "setCurrentTab, " + tabIndex);
         if (mCurrentTabIndex == tabIndex) {
             return;
         }
         mCurrentTabIndex = tabIndex;
         // will trigger onPageSelected()
         mPager.setCurrentItem(tabIndex);
-        // TODO update ui when tab switch
+        // TODO update ui when tab changed
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tab_receive:
-                onSwitchTab(0);
+                setCurrentTab(0);
                 break;
             case R.id.tab_send:
-                onSwitchTab(1);
+                setCurrentTab(1);
                 break;
             case R.id.tab_me:
-                onSwitchTab(2);
+                setCurrentTab(2);
                 break;
         }
     }
@@ -91,7 +91,7 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onPageSelected(int i) {
-        onSwitchTab(i);
+        setCurrentTab(i);
     }
 
     @Override

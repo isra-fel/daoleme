@@ -5,7 +5,13 @@
     <color name="material_primary_dark">#0F0</color>
     <color name="material_accent">#00F</color>
 
+    <color name="black">#000</color>
     <color name="white">#FFF</color>
     <color name="gray">#999</color>
+    <color name="red">#F00</color>
+    <color name="green">#0F0</color>
+    <color name="blue">#00F</color>
+
+    <color name="light_blue">#99F</color>
 
 </resources>

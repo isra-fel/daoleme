@@ -1,7 +1,5 @@
 package cn.edu.fudan.daoleme.module;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.Preference;
@@ -22,14 +20,14 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.setting_general);
-        mAbout = findPreference(getString(R.string.key_about));
+        mAbout = findPreference(getString(R.string.preference_about));
         mAbout.setOnPreferenceClickListener(this);
-        mUpdate = findPreference(getString(R.string.key_update));
+        mUpdate = findPreference(getString(R.string.preference_update));
         mUpdate.setOnPreferenceClickListener(this);
     }
 
     private void onQueryUpdate() {
-
+        // TODO query update
     }
 
     @Override

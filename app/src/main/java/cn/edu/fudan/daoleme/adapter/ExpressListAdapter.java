@@ -1,104 +1,68 @@
 package cn.edu.fudan.daoleme.adapter;
 
 import android.content.Context;
-import android.view.MotionEvent;
+import android.graphics.Color;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
 import cn.edu.fudan.daoleme.database.pojo.Express;
-import cn.edu.fudan.daoleme.view.ExpressItemView;
 
 /**
  * Created by rinnko on 2015/11/15.
  */
-public class ExpressListAdapter extends ArrayAdapter<Express> implements ExpressItemView.Callbacks, View.OnClickListener {
-    private List<Express> mExpressList;
-    private ExpressItemView.Factory mViewFactory;
-    private Callbacks mCallbacks;
+public class ExpressListAdapter extends ArrayAdapter<Express>  {
+    private static final String TAG = "ExpressListAdapter";
 
-    public interface Callbacks {
-        void onMark(int position);
-        void onReceive(int position);
-        void onPin(int position);
-        void onLongPress(int position);
-    }
+    private ListView mListView;
 
-    public ExpressListAdapter(Context context, ListView listView, List<Express> expressList, Callbacks callbacks) {
+    public ExpressListAdapter(Context context, List<Express> expressList, ListView listView) {
         super(context, R.layout.layout_express_item, expressList);
-        mExpressList = expressList;
-        mViewFactory = new ExpressItemView.Factory(context, listView, this);
-        mCallbacks = callbacks;
+        mListView = listView;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ExpressItemView view;
-        ViewHolder viewHolder;
+        ViewHolder holder;
         if (convertView != null) {
-            view = (ExpressItemView)convertView;
-            viewHolder = (ViewHolder)view.getTag();
+            holder = (ViewHolder)convertView.getTag();
         } else {
-            view = mViewFactory.create();
-            viewHolder = new ViewHolder();
-            viewHolder.position = position;
-            viewHolder.expressName = (TextView)view.findViewById(R.id.express_company);
-            viewHolder.expressTag = (TextView)view.findViewById(R.id.express_tag);
-            viewHolder.expressDetail = (TextView)view.findViewById(R.id.express_detail);
-            viewHolder.expressLastUpdate = (TextView)view.findViewById(R.id.express_last_update);
-            viewHolder.btnMark = (Button)view.findViewById(R.id.express_toggle_mark);
-            viewHolder.btnReceive = (Button)view.findViewById(R.id.express_toggle_receive);
-            viewHolder.btnPin = (Button)view.findViewById(R.id.express_toggle_pin);
-            viewHolder.btnMark.setOnClickListener(this);
-            viewHolder.btnReceive.setOnClickListener(this);
-            viewHolder.btnPin.setOnClickListener(this);
-            view.setTag(viewHolder);
+            LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            RelativeLayout layout = (RelativeLayout)inflater.inflate(R.layout.layout_express_item, parent, false);
+            holder = new ViewHolder();
+            holder.name = (TextView)layout.findViewById(R.id.express_company);
+            holder.tag = (TextView)layout.findViewById(R.id.express_tag);
+            holder.detail = (TextView)layout.findViewById(R.id.express_detail);
+            holder.lastUpdate = (TextView)layout.findViewById(R.id.express_last_update);
+            layout.setTag(holder);
+         // cause onItemClickListener not work
+         //   layout.setLongClickable(true);
+            convertView = layout;
         }
-        Express express = mExpressList.get(position);
-        viewHolder.expressName.setText(express.name);
-        viewHolder.expressTag.setText(express.tag);
-        viewHolder.expressDetail.setText(express.history.toString());
-        viewHolder.expressLastUpdate.setText(express.lastUpdate.toString());
-        return view;
-    }
-
-    @Override
-    public void onClick(View v) {
-        ExpressItemView view = (ExpressItemView)v.getParent().getParent().getParent();
-        int position = ((ViewHolder)view.getTag()).position;
-        switch (v.getId()) {
-            case R.id.express_toggle_mark:
-                mCallbacks.onMark(position);
-                break;
-            case R.id.express_toggle_receive:
-                mCallbacks.onReceive(position);
-                break;
-            case R.id.express_toggle_pin:
-                mCallbacks.onPin(position);
-                break;
-        }
+        Express express = getItem(position);
+        holder.name.setText(express.name);
+        holder.tag.setText(express.tag);
+        holder.detail.setText(express.history.toString());
+        holder.lastUpdate.setText(express.history.get(express.history.size() - 1).date.toString());
+        boolean isItemChecked = mListView.isItemChecked(position);
+        convertView.setBackgroundResource(isItemChecked
+                ? R.drawable.bg_checked_primary
+                : R.drawable.bg_pressable_primary);
+        return convertView;
     }
 
     static class ViewHolder {
-        int position;
-        TextView expressName;
-        TextView expressTag;
-        TextView expressDetail;
-        TextView expressLastUpdate;
-        Button btnMark;
-        Button btnReceive;
-        Button btnPin;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent e, ExpressItemView view) {
-        mCallbacks.onLongPress(((ViewHolder)view.getTag()).position);
+        TextView name;
+        TextView tag;
+        TextView detail;
+        TextView lastUpdate;
     }
 
 }

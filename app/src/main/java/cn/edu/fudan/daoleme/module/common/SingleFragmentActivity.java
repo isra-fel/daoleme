@@ -3,10 +3,12 @@ package cn.edu.fudan.daoleme.module.common;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 import cn.edu.fudan.daoleme.R;
 
@@ -16,8 +18,7 @@ import cn.edu.fudan.daoleme.R;
 public class SingleFragmentActivity extends AppCompatActivity {
     private static final String TAG = "SingleFragmentActivity";
 
-    private int mMenuResId;
-    private android.support.v7.widget.Toolbar.OnMenuItemClickListener mMenuItemClickHandler;
+    private View.OnKeyListener mOnKeyListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,20 +35,18 @@ public class SingleFragmentActivity extends AppCompatActivity {
         // setNavigationIcon() must after setSupportActionBar()
         toolbar.setNavigationIcon(R.drawable.ic_action_back);
 
-        mMenuResId = toolbarMeta.menu();
-
         Content contentMeta = getClass().getAnnotation(Content.class);
         Class<? extends Fragment> clazz = contentMeta.fragment();
 
         try {
             Fragment clazzInstance = clazz.newInstance();
-            if (clazzInstance instanceof android.support.v7.widget.Toolbar.OnMenuItemClickListener) {
-                mMenuItemClickHandler = (android.support.v7.widget.Toolbar.OnMenuItemClickListener)clazzInstance;
+            if (clazzInstance instanceof View.OnKeyListener) {
+                mOnKeyListener = (View.OnKeyListener)clazzInstance;
             }
             FragmentTransaction transaction = getFragmentManager().beginTransaction().replace(R.id.fragment_container, clazzInstance);
             transaction.addToBackStack(TAG);
             // see http://blog.csdn.net/stoppig/article/details/31776607
-            transaction.commitAllowingStateLoss();
+            transaction.commit();
         // API level 14 is not allowed multi-catch clause with reflection
         } catch (InstantiationException e) {
             e.printStackTrace();
@@ -58,23 +57,11 @@ public class SingleFragmentActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        boolean result;
-        if (mMenuResId != -1) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(mMenuResId, menu);
-            result = true;
+    public boolean onKeyUp(int keyCode, @NonNull KeyEvent event) {
+        if (mOnKeyListener != null && mOnKeyListener.onKey(null, keyCode, event)) {
+            return true;
         } else {
-            result = super.onCreateOptionsMenu(menu);
-        }
-        return result;
-    }
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (mMenuItemClickHandler != null) {
-            return mMenuItemClickHandler.onMenuItemClick(item);
-        } else {
-            return super.onOptionsItemSelected(item);
+            return super.onKeyUp(keyCode, event);
         }
     }
 

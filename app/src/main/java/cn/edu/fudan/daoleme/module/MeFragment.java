@@ -35,9 +35,6 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         userSignature.setText("signature");
         // TODO set mail-notification
         ImageView mailNotification = (ImageView)view.findViewById(R.id.express_notify);
-        if (true) {
-            mailNotification.setVisibility(View.VISIBLE);
-        }
 
         View vProfile = view.findViewById(R.id.profile);
         vProfile.setOnClickListener(this);
@@ -61,13 +58,14 @@ public class MeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void onLogout() {
-
+        // TODO onLogout
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.profile:
+                // current version is not support to edit user profile
                 // startActivity(new Intent(getActivity(), ProfileActivity.class));
                 break;
             case R.id.my_express:
