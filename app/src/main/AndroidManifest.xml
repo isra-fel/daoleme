@@ -28,8 +28,6 @@
         <activity android:name=".module.RegisterActivity" />
         <activity android:name=".module.ExpressDetailActivity" />
         <activity android:name=".module.MyExpressActivity" />
-        <activity android:name=".TestACTIVITY" >
-        </activity>
     </application>
 
 </manifest>
