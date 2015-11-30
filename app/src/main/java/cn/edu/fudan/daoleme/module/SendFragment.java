@@ -18,23 +18,23 @@ import cn.edu.fudan.daoleme.R;
 public class SendFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "SendFragment";
 
-    private Spinner mExpressName;
-    private EditText mFrom, mTo, mX, mY, mZ, mWeight;
+    private Spinner mCompany;
+    private EditText mFrom, mTo, mLength, mWidth, mHeight, mWeight;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_send, container, false);
         // TODO fetch express list
-        mExpressName = (Spinner)view.findViewById(R.id.express_company);
+        mCompany = (Spinner)view.findViewById(R.id.express_company);
         // see http://stackoverflow.com/questions/2784081/android-create-spinner-programmatically-from-array
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, new String[]{"顺丰", "圆通"});
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mExpressName.setAdapter(arrayAdapter);
+        mCompany.setAdapter(arrayAdapter);
         mFrom = (EditText)view.findViewById(R.id.express_from);
         mTo = (EditText)view.findViewById(R.id.express_to);
-        mX = (EditText)view.findViewById(R.id.express_x);
-        mY = (EditText)view.findViewById(R.id.express_y);
-        mZ = (EditText)view.findViewById(R.id.express_z);
+        mLength = (EditText)view.findViewById(R.id.express_length);
+        mWidth = (EditText)view.findViewById(R.id.express_width);
+        mHeight = (EditText)view.findViewById(R.id.express_height);
         mWeight = (EditText)view.findViewById(R.id.express_weight);
         Button btnQuery = (Button)view.findViewById(R.id.query);
         btnQuery.setOnClickListener(this);

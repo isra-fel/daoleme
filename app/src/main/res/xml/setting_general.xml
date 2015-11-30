@@ -27,11 +27,11 @@
         android:title="应用">
 
         <Preference
-            android:key="@string/key_update"
+            android:key="@string/preference_update"
             android:title="检测更新" />
 
         <Preference
-            android:key="@string/key_about"
+            android:key="@string/preference_about"
             android:title="关于"/>
 
     </PreferenceCategory>

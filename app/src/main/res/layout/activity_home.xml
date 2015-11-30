@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/tab_receive"
+                android:text="@string/receive_express"
                 android:textSize="20sp"
                 android:textColor="#FFF"/>
 
@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/tab_post"
+                android:text="@string/send_express"
                 android:textSize="20sp"
                 android:textColor="#FFF"/>
 
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/tab_me"
+                android:text="@string/me"
                 android:textSize="20sp"
                 android:textColor="#FFF"/>
 

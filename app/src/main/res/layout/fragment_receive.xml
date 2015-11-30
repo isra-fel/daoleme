@@ -59,17 +59,4 @@
         android:layout_marginTop="20dp"
         android:id="@+id/query_result" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/express_list"
-        android:visibility="gone"/>
-
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/express_not_found"
-        android:visibility="gone"
-        android:src="@mipmap/ic_launcher"/>
-
 </LinearLayout>

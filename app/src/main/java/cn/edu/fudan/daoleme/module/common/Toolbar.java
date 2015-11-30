@@ -14,6 +14,4 @@ public @interface Toolbar {
 
     public int title();
 
-    public int menu() default -1;
-
 }

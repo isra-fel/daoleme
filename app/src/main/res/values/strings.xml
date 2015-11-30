@@ -11,13 +11,13 @@
     <string name="setting">设置</string>
 
     <!-- preference key -->
-    <string name="key_update">key_update</string>
-    <string name="key_about">key_about</string>
+    <string name="preference_update">preference_update</string>
+    <string name="preference_about">preference_update</string>
 
     <!-- ui text for HomeActivity -->
-    <string name="tab_receive">快递查询</string>
-    <string name="tab_post">寄件查询</string>
-    <string name="tab_me">我</string>
+    <string name="receive_express">快递查询</string>
+    <string name="send_express">寄件查询</string>
+    <string name="me">我</string>
 
     <string name="hint_unlock">向右滑动结束提醒</string>
 </resources>

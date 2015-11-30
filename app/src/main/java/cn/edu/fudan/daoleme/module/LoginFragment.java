@@ -36,14 +36,14 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void onLogin() {
-
+        // TODO login
     }
 
     private void onForgetPassword() {
         if (mForgetPassword == null) {
             mForgetPassword = new ForgetPasswordFragment();
         }
-        mForgetPassword.show(getFragmentManager(), "修改密码");
+        mForgetPassword.show(getFragmentManager(), "忘记密码");
     }
 
     @Override

@@ -1,91 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="80dp">
+    android:layout_width="match_parent" android:layout_height="80dp"
+    android:background="@drawable/bg_pressable_primary">
 
-    <LinearLayout
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="4dp"
+        android:id="@+id/express_company"
+        android:text="顺丰"
+        android:textSize="16sp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:layout_below="@id/express_company"
+        android:id="@+id/express_tag"
+        android:text="标签"
+        android:textSize="14sp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/express_tag"
+        android:id="@+id/express_detail"
+        android:text="详情"
+        android:textSize="12sp"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:id="@+id/flipper_control">
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:id="@+id/express_toggle_pin"
-            android:background="#666"
-            android:text="关注"
-            android:textSize="18sp"
-            android:textColor="#FFF"/>
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:id="@+id/express_toggle_mark"
-            android:background="#999"
-            android:text="收藏"
-            android:textSize="18sp"
-            android:textColor="#FFF"/>
-
-        <Button
-            android:layout_width="80dp"
-            android:layout_height="match_parent"
-            android:id="@+id/express_toggle_receive"
-            android:background="#F66"
-            android:text="已收货"
-            android:textSize="18sp"
-            android:textColor="#FFF"/>
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:paddingTop="12dp"
-        android:id="@+id/flipper_main"
-        android:background="@drawable/bg_primary">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="80dp"
-            android:layout_marginBottom="4dp"
-            android:id="@+id/express_company"
-            android:text="顺丰"
-            android:textSize="16sp"
-            android:singleLine="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_below="@id/express_company"
-            android:id="@+id/express_tag"
-            android:text="标签"
-            android:textSize="14sp"
-            android:singleLine="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/express_tag"
-            android:id="@+id/express_detail"
-            android:text="详情"
-            android:textSize="12sp"
-            android:singleLine="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="2dp"
-            android:id="@+id/express_last_update"
-            android:text="2012-10-12"
-            android:textSize="12sp"
-            android:singleLine="true"/>
-
-    </RelativeLayout>
+        android:layout_marginTop="2dp"
+        android:id="@+id/express_last_update"
+        android:text="2012-10-12"
+        android:textSize="12sp"
+        android:singleLine="true"/>
 
 </RelativeLayout>

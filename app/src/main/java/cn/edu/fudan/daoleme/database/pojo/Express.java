@@ -11,6 +11,5 @@ public class Express {
     public String name;
     public String tag;
     public List<ExpressHistory> history;
-    public Date lastUpdate;
 
 }

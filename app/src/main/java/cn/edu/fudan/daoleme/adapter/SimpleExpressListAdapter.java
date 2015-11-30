@@ -16,34 +16,33 @@ import cn.edu.fudan.daoleme.database.pojo.Express;
 /**
  * Created by rinnko on 2015/11/13.
  */
-public class ExpressDetailAdapter extends ArrayAdapter<Express> {
+public class SimpleExpressListAdapter extends ArrayAdapter<Express> {
     private List<Express> expresses;
 
-    public ExpressDetailAdapter(Context context, List<Express> expresses) {
-        super(context, R.layout.layout_express_detail, expresses);
+    public SimpleExpressListAdapter(Context context, List<Express> expresses) {
+        super(context, R.layout.layout_express_item_simple, expresses);
         this.expresses = expresses;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+        ViewHolder holder;
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            LinearLayout layout = new LinearLayout(getContext());
-            layoutInflater.inflate(R.layout.layout_express_detail, layout);
+            LinearLayout layout = (LinearLayout)layoutInflater.inflate(R.layout.layout_express_item_simple, parent, false);
+            holder = new ViewHolder();
+            holder.tag = (TextView)convertView.findViewById(R.id.express_tag);
+            holder.state = (TextView)convertView.findViewById(R.id.express_state);
+            holder.lastUpdate = (TextView)convertView.findViewById(R.id.express_last_update);
+            layout.setTag(holder);
             convertView = layout;
-            viewHolder = new ViewHolder();
-            viewHolder.tag = (TextView)convertView.findViewById(R.id.tag);
-            viewHolder.state = (TextView)convertView.findViewById(R.id.state);
-            viewHolder.lastUpdate = (TextView)convertView.findViewById(R.id.last_update);
-            convertView.setTag(viewHolder);
         } else {
-            viewHolder = (ViewHolder)convertView.getTag();
+            holder = (ViewHolder)convertView.getTag();
         }
         Express express = expresses.get(position);
-        viewHolder.tag.setText(express.tag);
-        viewHolder.state.setText(express.history.get(express.history.size() - 1).toString());
-        viewHolder.lastUpdate.setText(express.lastUpdate.toString());
+        holder.tag.setText(express.tag);
+        holder.state.setText(express.history.get(express.history.size() - 1).toString());
+        holder.lastUpdate.setText(express.history.get(express.history.size() - 1).date.toString());
         return convertView;
     }
 
