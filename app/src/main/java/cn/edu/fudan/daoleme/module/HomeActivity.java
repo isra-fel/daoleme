@@ -1,5 +1,6 @@
 package cn.edu.fudan.daoleme.module;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -15,6 +16,7 @@ import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
 import cn.edu.fudan.daoleme.adapter.HomePagerAdapter;
+import cn.edu.fudan.daoleme.service.LockScreenService;
 
 /**
  * Created by rinnko on 2015/11/9.
@@ -58,6 +60,7 @@ public class HomeActivity extends AppCompatActivity implements
         mPager.setAdapter(pagerAdapter);
         mPager.addOnPageChangeListener(this);
 
+        startService(new Intent(HomeActivity.this, LockScreenService.class));
     }
 
     private void onSwitchTab(int tabIndex) {

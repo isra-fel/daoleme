@@ -19,5 +19,5 @@
     <string name="tab_post">寄件查询</string>
     <string name="tab_me">我</string>
 
-    
+    <string name="hint_unlock">向右滑动结束提醒</string>
 </resources>

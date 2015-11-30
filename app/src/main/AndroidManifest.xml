@@ -1,6 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="cn.edu.fudan.daoleme">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application android:name=".DLMApplication"
         android:allowBackup="true"
@@ -22,6 +25,22 @@
         <activity android:name=".module.RegisterActivity"/>
         <activity android:name=".module.ExpressDetailActivity"/>
         <activity android:name=".module.MyExpressActivity"/>
+
+        <activity android:name=".module.LockScreenActivity"
+            android:theme="@android:style/Theme.Wallpaper"
+            android:launchMode="singleTask">
+        </activity>
+        <activity
+            android:name=".module.LockHomeActivity"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".service.LockScreenService"/>
 
     </application>
 
