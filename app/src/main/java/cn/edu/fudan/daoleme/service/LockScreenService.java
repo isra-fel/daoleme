@@ -65,10 +65,10 @@ public class LockScreenService extends Service {
 
             if(intent.getAction().equals("android.intent.action.SCREEN_ON")){
                 Log.i(TAG, "----------------- android.intent.action.SCREEN_ON------");
+                startActivity(LockIntent);
 				mKeyguardManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
 				mKeyguardLock = mKeyguardManager.newKeyguardLock("Lock 1");
 				mKeyguardLock.disableKeyguard();
-                startActivity(LockIntent);
             }
         }
     };
@@ -78,15 +78,15 @@ public class LockScreenService extends Service {
         @Override
         public void onReceive(Context context , Intent intent) {
 
-            Log.i(TAG, intent.getAction());
-
-            if(intent.getAction().equals("android.intent.action.SCREEN_OFF")){
-                Log.i(TAG, "----------------- android.intent.action.SCREEN_OFF------");
-                mKeyguardManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
-                mKeyguardLock = mKeyguardManager.newKeyguardLock("Lock 1");
-                mKeyguardLock.disableKeyguard();
-                startActivity(LockIntent);
-            }
+//            Log.i(TAG, intent.getAction());
+//
+//            if(intent.getAction().equals("android.intent.action.SCREEN_OFF")){
+//                Log.i(TAG, "----------------- android.intent.action.SCREEN_OFF------");
+//                mKeyguardManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
+//                mKeyguardLock = mKeyguardManager.newKeyguardLock("Lock 1");
+//                mKeyguardLock.disableKeyguard();
+//                startActivity(LockIntent);
+//            }
         }
 
     };

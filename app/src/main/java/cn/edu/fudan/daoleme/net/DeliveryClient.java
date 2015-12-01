@@ -27,12 +27,13 @@ public class DeliveryClient {
      * 新建快递
      * @param deliveryId 单号
      * @param company 公司
+     * @param comment 快递备注名
      * @param isPinned 是否被贴到锁屏上
      * @param isReceived 是否收到
      * @param context
      * @param callback
      */
-    public static void createDelivery(String deliveryId, String company, boolean isPinned, boolean isReceived, Context context, JsonHttpResponseHandler callback) {
+    public static void createDelivery(String deliveryId, String company,String comment, boolean isPinned, boolean isReceived, Context context, JsonHttpResponseHandler callback) {
 
     }
 

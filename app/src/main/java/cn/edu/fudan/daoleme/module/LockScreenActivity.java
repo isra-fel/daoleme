@@ -24,16 +24,15 @@ import cn.edu.fudan.daoleme.service.LockScreenService;
 public class LockScreenActivity extends Activity {
 
     private static String TAG = "LockScreenAcitivity";
-
     private SliderRelativeLayout sliderLayout = null;
-
     private ImageView imgView_getup_arrow; // 动画图片
     private AnimationDrawable animArrowDrawable = null;
-
-    private Context mContext = null ;
-
     public static int MSG_LOCK_SUCESS = 1;
 
+    private static Context mContext = null ;
+    public static Context getContext() {
+        return mContext;
+    }
 
     /** Called when the activity is first created. */
     @Override
@@ -42,7 +41,7 @@ public class LockScreenActivity extends Activity {
         mContext = LockScreenActivity.this;
 		/*设置全屏，无标题*/
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_lock_screen);
         initViews();
 
@@ -75,7 +74,6 @@ public class LockScreenActivity extends Activity {
 
     //通过延时控制当前绘制bitmap的位置坐标
     private Runnable AnimationDrawableTask = new Runnable(){
-
         public void run(){
             animArrowDrawable.start();
             mHandler.postDelayed(AnimationDrawableTask, 300);
@@ -83,11 +81,8 @@ public class LockScreenActivity extends Activity {
     };
 
     private Handler mHandler =new Handler (){
-
         public void handleMessage(Message msg){
-
             Log.i(TAG, "handleMessage :  #### " );
-
             if(MSG_LOCK_SUCESS == msg.what)
                 finish(); // 锁屏成功时，结束我们的Activity界面
         }
@@ -99,14 +94,9 @@ public class LockScreenActivity extends Activity {
         switch (keyCode) {
             case KeyEvent.KEYCODE_BACK:
                 return true;
-
-            case KeyEvent.KEYCODE_MENU:
-                return true;
-
             default:
                 break;
         }
         return super.onKeyDown(keyCode, event);
     }
-
 }
