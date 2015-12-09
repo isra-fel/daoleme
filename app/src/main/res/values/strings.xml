@@ -3,20 +3,73 @@
     <!-- global values -->
     <string name="app_name">到了么</string>
 
-    <!-- toolbar title -->
+    <!-- universal strings -->
     <string name="login">登录</string>
     <string name="register">注册</string>
-    <string name="express_detail">快递详情</string>
-    <string name="my_express">我的快递</string>
+    <string name="delivery_detail">快递详情</string>
+    <string name="my_delivery">我的快递</string>
     <string name="setting">设置</string>
-
-    <!-- preference key -->
-    <string name="preference_update">preference_update</string>
-    <string name="preference_about">preference_update</string>
-
-    <!-- ui text for HomeActivity -->
-    <string name="receive_express">快递查询</string>
-    <string name="send_express">寄件查询</string>
+    <string name="receive_delivery">快递查询</string>
+    <string name="send_delivery">寄件查询</string>
     <string name="me">我</string>
+    <string name="delivery_id">快递单号</string>
+    <string name="express_company">快递公司</string>
+    <string name="query">查询</string>
+    <string name="search_delivery_title">输入快递信息</string>
+    <string name="search_express_title">查找快递网点</string>
+    <string name="express_company_shunfeng">顺丰</string>
+    <string name="express_company_yuantong">圆通</string>
+    <string name="from">出发地</string>
+    <string name="to">目的地</string>
+    <string name="from_example">XX</string>
+    <string name="to_example">XX</string>
+    <string name="reset_password">修改密码</string>
+    <string name="logout">登出</string>
+    <string name="preference_category_function">功能</string>
+    <string name="preference_category_application">应用</string>
+    <string name="about">关于</string>
+    <string name="check_update">检测更新</string>
+    <string name="open_wallpaper_notify">开启锁屏提示</string>
+    <string name="open_wallpaper_notify_description">到了么会在您的设备锁屏时显示快递的最新进度</string>
+    <string name="notify_if_favorite_default">收藏时默认添加到锁屏提示</string>
+    <string name="notify_if_favorite_default_description">OX</string>
+    <string name="poll_frequency">查询频率</string>
+    <string name="poll_frequency_description">到了么会在后台查询快递</string>
+    <string name="label_login_forget_password">忘记密码？</string>
+    <string name="label_login_fast_register">快速注册</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="email">邮箱</string>
+    <string name="old_password">旧密码</string>
+    <string name="new_password">新密码</string>
+    <string name="repeat_password">重复密码</string>
+    <string name="send_verification_mail">发送验证邮件</string>
+    <string name="receiver">收件人</string>
+    <string name="express_status">快递状态</string>
+    <string name="pin">pin</string>
+    <string name="receive">接收</string>
+    <string name="delete">删除</string>
+    <string name="tag">标签</string>
+    <string name="delivery_state">快递状态</string>
+    <string name="ok">确认</string>
+    <string name="cancel">取消</string>
+    <string name="nothing_found">没有找到相关内容</string>
+    <string name="mark">收藏</string>
+    <string name="username">用户名</string>
+    <string name="password">密码</string>
 
+    <!-- messages, for toast and dialog -->
+    <string name="message_loading_reset_password">修改密码中</string>
+    <string name="message_reset_password_success">修改密码成功</string>
+    <string name="message_reset_password_fail">修改密码失败</string>
+
+    <string name="message_loading_login">登陆中</string>
+    <string name="message_login_fail">登录失败</string>
+    <string name="message_login_success">登陆成功</string>
+
+    <string name="message_password_not_match">两次输入的密码不一致</string>
+    <string name="message_loading_register">注册中</string>
+    <string name="message_logout_success">登出成功</string>
+    <string name="message_logout_fail">登出失败</string>
+    <string name="message_loading_query">正在查询</string>
 </resources>

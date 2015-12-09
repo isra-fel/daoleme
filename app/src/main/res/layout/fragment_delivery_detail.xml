@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+    android:layout_marginRight="@dimen/activity_horizontal_margin">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- company -->
+        <TextView
+            style="@style/BaseLabel"
+            android:layout_marginTop="30dp"
+            android:text="@string/express_company"/>
+
+        <TextView
+            style="@style/TextItemContent"
+            android:id="@+id/express_company"/>
+
+        <!-- id -->
+        <TextView
+            style="@style/BaseLabel"
+            android:text="@string/delivery_id"/>
+
+        <TextView
+            style="@style/TextItemContent"
+            android:id="@+id/delivery_id" />
+
+        <!-- form -->
+        <TextView
+            style="@style/BaseLabel"
+            android:text="@string/from"/>
+
+        <TextView
+            style="@style/TextItemContent"
+            android:id="@+id/express_from" />
+
+        <!-- to -->
+        <TextView
+            style="@style/BaseLabel"
+            android:text="@string/to"/>
+
+        <TextView
+            style="@style/TextItemContent"
+            android:id="@+id/express_to" />
+
+        <!-- receiver -->
+        <TextView
+            style="@style/BaseLabel"
+            android:text="@string/receiver"/>
+
+        <TextView
+            style="@style/TextItemContent"
+            android:id="@+id/express_receiver" />
+
+        <!-- state -->
+        <TextView
+            style="@style/BaseLabel"
+            android:text="@string/express_status"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:id="@+id/express_history">
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

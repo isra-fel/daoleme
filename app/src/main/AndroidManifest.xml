@@ -26,8 +26,8 @@
         <activity android:name=".module.AboutActivity" />
         <activity android:name=".module.LoginActivity" />
         <activity android:name=".module.RegisterActivity" />
-        <activity android:name=".module.ExpressDetailActivity" />
-        <activity android:name=".module.MyExpressActivity" />
+        <activity android:name=".module.DeliveryDetailActivity" />
+        <activity android:name=".module.MyDeliveryActivity" />
     </application>
 
 </manifest>

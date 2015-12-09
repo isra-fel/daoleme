@@ -2,37 +2,37 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
     <PreferenceCategory
-        android:title="功能">
+        android:title="@string/preference_category_function">
 
         <SwitchPreference
             android:key="open_wallpaper_notify"
-            android:title="开启锁屏提示"
-            android:summary="到了么会在您的设备锁屏时显示快递的最新进度" />
+            android:title="@string/open_wallpaper_notify"
+            android:summary="@string/open_wallpaper_notify_description" />
 
         <SwitchPreference
             android:key="notify_if_favorite_default"
-            android:title="收藏时默认添加到锁屏提示"
-            android:summary="OX"/>
+            android:title="@string/notify_if_favorite_default"
+            android:summary="@string/notify_if_favorite_default_description"/>
 
         <ListPreference
             android:key="poll_frequency"
-            android:title="查询频率"
-            android:summary="到了么会在后台查询快递"
+            android:title="@string/poll_frequency"
+            android:summary="@string/poll_frequency_description"
             android:entries="@array/poll_frequency_entries"
             android:entryValues="@array/poll_frequency_entries_values"/>
 
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="应用">
+        android:title="@string/preference_category_application">
 
         <Preference
-            android:key="@string/preference_update"
-            android:title="检测更新" />
+            android:key="preference_update"
+            android:title="@string/check_update" />
 
         <Preference
-            android:key="@string/preference_about"
-            android:title="关于"/>
+            android:key="preference_about"
+            android:title="@string/about"/>
 
     </PreferenceCategory>
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="80dp"
+    android:background="@drawable/bg_pressable_primary"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
+
+    <TextView
+        style="@style/BaseTextView1"
+        android:id="@+id/express_company"
+        android:singleLine="true" />
+
+    <TextView
+        style="@style/BaseTextView2"
+        android:layout_below="@id/express_company"
+        android:id="@+id/tag"
+        android:singleLine="true" />
+
+    <TextView
+        style="@style/BaseTextView2"
+        android:layout_below="@id/tag"
+        android:id="@+id/state_summary"
+        android:singleLine="true" />
+
+    <TextView
+        style="@style/BaseTextView3"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="4dp"
+        android:id="@+id/date"
+        android:singleLine="true" />
+
+</RelativeLayout>

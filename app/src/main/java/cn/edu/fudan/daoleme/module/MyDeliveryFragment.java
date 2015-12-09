@@ -2,12 +2,8 @@ package cn.edu.fudan.daoleme.module;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.ActionMode;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,48 +13,45 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
-import cn.edu.fudan.daoleme.adapter.ExpressListAdapter;
-import cn.edu.fudan.daoleme.database.pojo.Express;
-import cn.edu.fudan.daoleme.database.pojo.ExpressHistory;
+import cn.edu.fudan.daoleme.adapter.DeliveryListAdapter;
+import cn.edu.fudan.daoleme.data.pojo.Delivery;
 
 /**
  * Created by rinnko on 2015/11/15.
  */
-public class MyExpressFragment extends Fragment implements
+public class MyDeliveryFragment extends Fragment implements
         AdapterView.OnItemClickListener,
         AdapterView.OnItemLongClickListener,
         View.OnClickListener,
         View.OnKeyListener {
-    private static final String TAG = "MyExpressFragment";
+    private static final String TAG = "MyDeliveryFragment";
 
     private ListView mListView;
     private View mOperationBar;
     private boolean mMultiChoiceMode;
-    private ExpressListAdapter mAdapter;
+    private DeliveryListAdapter mAdapter;
     private Menu mSelectMenu;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_myexpress, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_delivery, container, false);
 
-        mListView = (ListView)view.findViewById(R.id.express_list);
+        mListView = (ListView)view.findViewById(R.id.delivery_list);
         mOperationBar = view.findViewById(R.id.operation_bar);
-        mAdapter = new ExpressListAdapter(getActivity(), getData(), mListView);
+        mAdapter = new DeliveryListAdapter(getActivity(), getData(), mListView);
         mListView.setAdapter(mAdapter);
         mListView.setOnItemClickListener(this);
         mListView.setOnItemLongClickListener(this);
-        Button btnMultipleMark = (Button)view.findViewById(R.id.multiple_mark);
-        Button btnMultiplePin = (Button)view.findViewById(R.id.multiple_pin);
-        Button btnMultipleDelete = (Button)view.findViewById(R.id.multiple_delete);
+        View btnMultipleMark = view.findViewById(R.id.multiple_receive);
+        View btnMultiplePin = view.findViewById(R.id.multiple_pin);
+        View btnMultipleDelete = view.findViewById(R.id.multiple_delete);
         btnMultipleMark.setOnClickListener(this);
         btnMultiplePin.setOnClickListener(this);
         btnMultipleDelete.setOnClickListener(this);
@@ -69,20 +62,17 @@ public class MyExpressFragment extends Fragment implements
 
     }
 
-    private List<Express> getData() {
-        List<Express> expressList = new ArrayList<>();
+    private List<Delivery> getData() {
+        List<Delivery> deliveryList = new ArrayList<>();
         for ( int i = 0; i < 100; i++) {
-            Express express = new Express();
-            express.name = "name";
-            express.tag = "tag";
-            List<ExpressHistory> expressHistories = new ArrayList<>();
-            ExpressHistory expressHistory = new ExpressHistory();
-            expressHistory.date = new Date();
-            expressHistories.add(expressHistory);
-            express.history = expressHistories;
-            expressList.add(express);
+            Delivery delivery = new Delivery();
+            delivery.expressCompanyName = "Company";
+            delivery.tag = "tag";
+            delivery.state = new ArrayList<>();
+            delivery.state.add("asdfasdfasdfas");
+            deliveryList.add(delivery);
         }
-        return expressList;
+        return deliveryList;
     }
 
     private void onExitMultiSelectMode() {
@@ -94,9 +84,8 @@ public class MyExpressFragment extends Fragment implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.d(TAG, "onItemClick");
         if (!mMultiChoiceMode) {
-            Intent intent = new Intent(getActivity(), ExpressDetailActivity.class);
+            Intent intent = new Intent(getActivity(), DeliveryDetailActivity.class);
             // TODO pass express_id
             intent.putExtra("express_id", "express_id");
             startActivity(intent);
@@ -116,9 +105,9 @@ public class MyExpressFragment extends Fragment implements
         return true;
     }
 
-    private void onMultipleMark() {
-        Log.d(TAG, "onMultipleMark");
-        // TODO multiple mark
+    private void onMultipleReceive() {
+        Log.d(TAG, "onMultipleReceive");
+        // TODO multiple receive
         onExitMultiSelectMode();
     }
 
@@ -134,11 +123,18 @@ public class MyExpressFragment extends Fragment implements
         onExitMultiSelectMode();
     }
 
+    private void onSelectAll() {
+        int itemCount = mAdapter.getCount();
+        for ( int i = 0; i < itemCount; i++) {
+            mListView.setItemChecked(i, true);
+        }
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.multiple_mark:
-                onMultipleMark();
+            case R.id.multiple_receive:
+                onMultipleReceive();
                 break;
             case R.id.multiple_delete:
                 onMultipleDelete();
@@ -171,7 +167,7 @@ public class MyExpressFragment extends Fragment implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_select_all:
-                // TODO select-all or unselect-all
+                onSelectAll();
                 break;
             case R.id.action_cancel:
                 onExitMultiSelectMode();

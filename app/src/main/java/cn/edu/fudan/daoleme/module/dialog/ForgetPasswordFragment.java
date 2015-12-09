@@ -1,5 +1,6 @@
-package cn.edu.fudan.daoleme.module;
+package cn.edu.fudan.daoleme.module.dialog;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.app.DialogFragment;
 import android.view.LayoutInflater;
@@ -19,16 +20,21 @@ public class ForgetPasswordFragment extends DialogFragment implements View.OnCli
     private EditText mEmail;
 
     @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        return new Dialog(getActivity(), R.style.BaseDialog);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_forget_password, container, false);
         mEmail = (EditText)view.findViewById(R.id.email);
-        Button btnSend = (Button)view.findViewById(R.id.send);
+        View btnSend = view.findViewById(R.id.send);
         btnSend.setOnClickListener(this);
         return view;
     }
 
     private void onSendMail() {
-        // TODO send mail
+        // TODO No such API
     }
 
     @Override

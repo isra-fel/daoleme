@@ -1,12 +1,11 @@
 package cn.edu.fudan.daoleme.module;
 
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -18,27 +17,27 @@ import cn.edu.fudan.daoleme.R;
 public class SendFragment extends Fragment implements View.OnClickListener {
     private static final String TAG = "SendFragment";
 
-    private Spinner mCompany;
-    private EditText mFrom, mTo, mLength, mWidth, mHeight, mWeight;
+    private Spinner mExpressCompany;
+    private EditText mFrom, mTo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_send, container, false);
-        // TODO fetch express list
-        mCompany = (Spinner)view.findViewById(R.id.express_company);
+
+        String[] expressCompanyList = getResources().getStringArray(R.array.express_company_list);
+        mExpressCompany = (Spinner)view.findViewById(R.id.express_company);
         // see http://stackoverflow.com/questions/2784081/android-create-spinner-programmatically-from-array
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_spinner_item, new String[]{"顺丰", "圆通"});
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, expressCompanyList);
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        mCompany.setAdapter(arrayAdapter);
+
+        mExpressCompany.setAdapter(arrayAdapter);
         mFrom = (EditText)view.findViewById(R.id.express_from);
         mTo = (EditText)view.findViewById(R.id.express_to);
-        mLength = (EditText)view.findViewById(R.id.express_length);
-        mWidth = (EditText)view.findViewById(R.id.express_width);
-        mHeight = (EditText)view.findViewById(R.id.express_height);
-        mWeight = (EditText)view.findViewById(R.id.express_weight);
-        Button btnQuery = (Button)view.findViewById(R.id.query);
+        View btnQuery = view.findViewById(R.id.query);
         btnQuery.setOnClickListener(this);
+
         return view;
+
     }
 
     private void onQuerySuccess() {
@@ -50,8 +49,11 @@ public class SendFragment extends Fragment implements View.OnClickListener {
     }
 
     private void onQuery() {
-        // TODO query
-        onQuerySuccess();
+        // TODO validate input
+        String company = (String)mExpressCompany.getSelectedItem();
+        String from = mFrom.getText().toString();
+        String to = mTo.getText().toString();
+        // TODO no such API
     }
 
     @Override

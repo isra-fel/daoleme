@@ -1,4 +1,4 @@
-package cn.edu.fudan.daoleme.database.pojo;
+package cn.edu.fudan.daoleme.data.pojo;
 
 /**
  * Created by rinnko on 2015/11/24.

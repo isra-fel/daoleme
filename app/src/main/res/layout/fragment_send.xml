@@ -1,137 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp">
+    android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:background="@color/bg_primary">
 
+    <!-- Header -->
+    <TextView
+        style="@style/BaseTextHeader"
+        android:text="@string/search_express_title"/>
+
+    <!-- from -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:text="快递公司" />
+            style="@style/BaseLabel"
+            android:text="@string/from"
+            android:labelFor="@id/express_from"/>
+
+        <EditText
+            style="@style/BaseEditText"
+            android:layout_width="match_parent"
+            android:id="@+id/express_from"
+            android:hint="@string/from_example" />
+
+    </LinearLayout>
+
+    <!-- to -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/BaseLabel"
+            android:text="@string/to"
+            android:labelFor="@id/express_to"/>
+
+        <EditText
+            style="@style/BaseEditText"
+            android:layout_width="match_parent"
+            android:id="@+id/express_to"
+            android:hint="@string/to_example" />
+
+    </LinearLayout>
+
+    <!-- express_company -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:divider="@drawable/divider_primary"
+        android:showDividers="end">
+
+        <TextView
+            style="@style/BaseLabel"
+            android:text="@string/express_company" />
 
         <Spinner
-            android:id="@+id/express_company"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            style="@style/BaseSpinner"
+            android:layout_width="match_parent"
+            android:id="@+id/express_company" />
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="出发地"
-            android:textSize="14sp"/>
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/express_from" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="目的地"
-            android:textSize="14sp" />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/express_to" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="长" />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/express_length" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="宽" />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/express_width" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="宽" />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/express_height" />
-
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="重量" />
-
-        <EditText
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/express_weight" />
-
-    </LinearLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_gravity="center_horizontal"
-        android:text="查询"
-        android:textSize="18sp"
-        android:id="@+id/query"/>
-
-    <ViewStub
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/query_result" />
+    <!-- queryButton -->
+    <TextView
+        style="@style/BaseTextButton"
+        android:layout_marginTop="40dp"
+        android:id="@+id/query"
+        android:text="@string/query" />
 
 </LinearLayout>

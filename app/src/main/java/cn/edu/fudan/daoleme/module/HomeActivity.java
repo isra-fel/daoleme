@@ -1,14 +1,15 @@
 package cn.edu.fudan.daoleme.module;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.app.Fragment;
+import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,11 @@ public class HomeActivity extends AppCompatActivity implements
         ViewPager.OnPageChangeListener {
     private static final String TAG = "HomeActivity";
 
-    private ViewGroup mTabReceive, mTabSend, mTabMe;
+    private ImageView mIconReceive, mIconSend, mIconMe;
+    private TextView mTextReceive, mTextSend, mTextMe;
     private ViewPager mPager;
-    private int mCurrentTabIndex; // start from 0, 0->mTabReceive, 1->mTabSend, 2->mTabMe
+    private int mColorNormal, mColorActive;
+    private int mIndexCurrentTab; // start from 0, 0->mTabReceive, 1->mTabSend, 2->mTabMe
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,10 +42,16 @@ public class HomeActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // listen to click events
-        mTabReceive = (ViewGroup)findViewById(R.id.tab_receive);
-        mTabSend = (ViewGroup)findViewById(R.id.tab_send);
-        mTabMe = (ViewGroup)findViewById(R.id.tab_me);
+        // add listener for clickEvents
+        ViewGroup mTabReceive = (ViewGroup)findViewById(R.id.tab_receive);
+        mIconReceive = (ImageView)mTabReceive.findViewById(R.id.tab_receive_icon);
+        mTextReceive = (TextView)mTabReceive.findViewById(R.id.tab_receive_title);
+        ViewGroup mTabSend = (ViewGroup)findViewById(R.id.tab_send);
+        mIconSend = (ImageView)mTabSend.findViewById(R.id.tab_send_icon);
+        mTextSend = (TextView)mTabSend.findViewById(R.id.tab_send_title);
+        ViewGroup mTabMe = (ViewGroup)findViewById(R.id.tab_me);
+        mIconMe = (ImageView)mTabMe.findViewById(R.id.tab_me_icon);
+        mTextMe = (TextView)mTabMe.findViewById(R.id.tab_me_title);
         mTabReceive.setOnClickListener(this);
         mTabSend.setOnClickListener(this);
         mTabMe.setOnClickListener(this);
@@ -52,23 +61,53 @@ public class HomeActivity extends AppCompatActivity implements
         fragments.add(new ReceiveFragment());
         fragments.add(new SendFragment());
         fragments.add(new MeFragment());
-        mCurrentTabIndex = 0;
-        FragmentPagerAdapter pagerAdapter = new HomePagerAdapter(getSupportFragmentManager(), fragments);
+        mIndexCurrentTab = 0;
+        FragmentPagerAdapter pagerAdapter = new HomePagerAdapter(getFragmentManager(), fragments);
         mPager = (ViewPager)findViewById(R.id.pager);
         mPager.setAdapter(pagerAdapter);
         mPager.addOnPageChangeListener(this);
 
+        mColorNormal = getResources().getColor(R.color.tab_color);
+        mColorActive = getResources().getColor(R.color.tab_color_active);
+
     }
 
     private void setCurrentTab(int tabIndex) {
-        Log.d(TAG, "setCurrentTab, " + tabIndex);
-        if (mCurrentTabIndex == tabIndex) {
+        if (mIndexCurrentTab == tabIndex) {
             return;
         }
-        mCurrentTabIndex = tabIndex;
         // will trigger onPageSelected()
         mPager.setCurrentItem(tabIndex);
-        // TODO update ui when tab changed
+        // update ui when tab changed
+        switch (mIndexCurrentTab) {
+            case 0:
+                mTextReceive.setTextColor(mColorNormal);
+                mIconReceive.setImageResource(R.drawable.ic_action_mail);
+                break;
+            case 1:
+                mTextSend.setTextColor(mColorNormal);
+                mIconSend.setImageResource(R.drawable.ic_action_search);
+                break;
+            case 2:
+                mTextMe.setTextColor(mColorNormal);
+                mIconMe.setImageResource(R.drawable.ic_action_user);
+                break;
+        }
+        switch (tabIndex) {
+            case 0:
+                mTextReceive.setTextColor(mColorActive);
+                mIconReceive.setImageResource(R.drawable.ic_action_mail_active);
+                break;
+            case 1:
+                mTextSend.setTextColor(mColorActive);
+                mIconSend.setImageResource(R.drawable.ic_action_search_active);
+                break;
+            case 2:
+                mTextMe.setTextColor(mColorActive);
+                mIconMe.setImageResource(R.drawable.ic_action_user_active);
+                break;
+        }
+        mIndexCurrentTab = tabIndex;
     }
 
     @Override

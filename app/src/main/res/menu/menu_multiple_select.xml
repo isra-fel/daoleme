@@ -6,13 +6,13 @@
     <item android:id="@+id/action_select_all"
         android:title="all"
         app:showAsAction="always"
-        android:icon="@drawable/ic_action_select_all"
+        android:icon="@drawable/ic_action_select_all_light"
         android:orderInCategory="2"/>
 
     <item android:id="@+id/action_cancel"
         android:title="cancel"
         app:showAsAction="always"
-        android:icon="@drawable/ic_action_cancel"
+        android:icon="@drawable/ic_action_cancel_light"
         android:orderInCategory="2"/>
     </group>
 </menu>

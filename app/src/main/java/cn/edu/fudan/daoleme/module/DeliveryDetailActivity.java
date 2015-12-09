@@ -6,8 +6,8 @@ import cn.edu.fudan.daoleme.module.common.SingleFragmentActivity;
 import cn.edu.fudan.daoleme.module.common.Toolbar;
 
 /**
- * Created by rinnko on 2015/11/15.
+ * Created by rinnko on 2015/11/14.
  */
-@Toolbar(title = R.string.my_express)
-@Content(fragment = MyExpressFragment.class)
-public class MyExpressActivity extends SingleFragmentActivity {}
+@Toolbar(title = R.string.delivery_detail)
+@Content(fragment = DeliveryDetailFragment.class)
+public class DeliveryDetailActivity extends SingleFragmentActivity {}

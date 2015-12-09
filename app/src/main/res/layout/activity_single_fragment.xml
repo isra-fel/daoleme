@@ -4,14 +4,11 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:id="@+id/toolbar"
-        android:title="@string/app_name"
+        style="@style/BaseToolbar"
         app:theme="@style/AppTheme.Toolbar"
         app:titleTextAppearance="@style/AppTheme.Toolbar.Title"
         app:subtitleTextAppearance="@style/AppTheme.Toolbar.Title"
-        android:background="#000"/>
+        android:id="@+id/toolbar" />
 
     <!--fragment placeholder, see http://androidforums.com/threads/how-can-i-use-fragment-as-a-placeholder.711313/-->
     <FrameLayout

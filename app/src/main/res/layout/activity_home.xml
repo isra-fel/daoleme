@@ -3,95 +3,82 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <!--http://stackoverflow.com/questions/26852108/how-do-you-set-the-title-color-for-the-new-toolbar-->
+    <!-- 顶部Toolbar -->
     <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/toolbar"
-        android:title="@string/app_name"
+        style="@style/BaseToolbar"
         app:theme="@style/AppTheme.Toolbar"
         app:titleTextAppearance="@style/AppTheme.Toolbar.Title"
         app:subtitleTextAppearance="@style/AppTheme.Toolbar.Title"
-        android:background="#000"/>
+        android:id="@+id/toolbar"
+        android:title="@string/app_name" />
 
+
+    <!-- ViewPager -->
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:id="@+id/pager"/>
 
+
+    <!-- 底部Host容器 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:background="#000"
+        android:layout_height="55dp"
+        android:background="@drawable/bg_light_top_border"
         android:orientation="horizontal">
 
+        <!-- 快递查询 -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
+            style="@style/Tab"
             android:id="@+id/tab_receive">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_action_mail" />
+                style="@style/TabIcon"
+                android:id="@+id/tab_receive_icon"
+                android:src="@drawable/ic_action_mail_active" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/receive_express"
-                android:textSize="20sp"
-                android:textColor="#FFF"/>
+                style="@style/TabTitle"
+                android:textColor="@color/color_primary"
+                android:id="@+id/tab_receive_title"
+                android:text="@string/receive_delivery" />
 
         </LinearLayout>
 
+        <!-- 寄件查询 -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
+            style="@style/Tab"
             android:id="@+id/tab_send">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
+                style="@style/TabIcon"
+                android:id="@+id/tab_send_icon"
                 android:src="@drawable/ic_action_search" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/send_express"
-                android:textSize="20sp"
-                android:textColor="#FFF"/>
+                style="@style/TabTitle"
+                android:id="@+id/tab_send_title"
+                android:text="@string/send_delivery" />
 
         </LinearLayout>
 
+        <!-- 我 -->
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical"
+            style="@style/Tab"
             android:id="@+id/tab_me">
 
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="center"
+                style="@style/TabIcon"
+                android:id="@+id/tab_me_icon"
                 android:src="@drawable/ic_action_user" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/me"
-                android:textSize="20sp"
-                android:textColor="#FFF"/>
+                style="@style/TabTitle"
+                android:id="@+id/tab_me_title"
+                android:text="@string/me" />
 
         </LinearLayout>
 

@@ -1,62 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="20dp"
-    android:layout_marginRight="20dp">
+    android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/bg_primary"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin">
 
+    <!-- Header -->
+    <TextView
+        style="@style/BaseTextHeader"
+        android:text="@string/search_delivery_title"/>
+
+    <!-- express_id -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/activity_vertical_margin">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:layout_marginTop="20dp"
-            android:text="快递公司"
-            android:labelFor="@id/express_company"/>
-
-        <Spinner
-            android:id="@+id/express_company"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="快递单号"
-            android:textSize="20sp"/>
+            style="@style/BaseLabel"
+            android:text="@string/delivery_id" />
 
         <EditText
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/express_id" />
+            style="@style/BaseEditText"
+            android:layout_width="match_parent"
+            android:inputType="number"
+            android:id="@+id/delivery_id"
+            android:hint="@string/delivery_id" />
+
     </LinearLayout>
 
-    <Button
+    <!-- express_company -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:text="查询"
-        android:textSize="18sp"
-        android:id="@+id/query"/>
+        android:orientation="vertical"
+        android:divider="@drawable/divider_primary"
+        android:showDividers="end">
 
-    <ViewStub
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/query_result" />
+        <TextView
+            style="@style/BaseLabel"
+            android:text="@string/express_company" />
+        
+        <Spinner
+            style="@style/BaseSpinner"
+            android:layout_width="match_parent"
+            android:id="@+id/express_company" />
+
+    </LinearLayout>
+
+    <!-- queryButton -->
+    <TextView
+        style="@style/BaseTextButton"
+        android:layout_marginTop="40dp"
+        android:text="@string/query"
+        android:id="@+id/query"/>
 
 </LinearLayout>

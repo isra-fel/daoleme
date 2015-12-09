@@ -30,10 +30,16 @@ public class SingleFragmentActivity extends AppCompatActivity {
         int titleResId = toolbarMeta.title();
 
         android.support.v7.widget.Toolbar toolbar = (android.support.v7.widget.Toolbar)findViewById(R.id.toolbar);
-        toolbar.setSubtitle(titleResId);
+        toolbar.setTitle(titleResId);
         setSupportActionBar(toolbar);
         // setNavigationIcon() must after setSupportActionBar()
         toolbar.setNavigationIcon(R.drawable.ic_action_back);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         Content contentMeta = getClass().getAnnotation(Content.class);
         Class<? extends Fragment> clazz = contentMeta.fragment();

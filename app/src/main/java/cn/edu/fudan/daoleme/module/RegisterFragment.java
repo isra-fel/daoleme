@@ -5,10 +5,18 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import cn.edu.fudan.daoleme.R;
+import cn.edu.fudan.daoleme.net.UserClient;
+import cn.edu.fudan.daoleme.util.LoadingUtil;
+import cn.edu.fudan.daoleme.util.ToastUtil;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by rinnko on 2015/11/14.
@@ -25,19 +33,47 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         mPassword = (EditText)view.findViewById(R.id.user_password);
         mPasswordConfirm = (EditText)view.findViewById(R.id.user_password_confirm);
         mEMail = (EditText)view.findViewById(R.id.user_email);
-        Button btnRegister = (Button)view.findViewById(R.id.btn_register);
+        View btnRegister = view.findViewById(R.id.register);
         btnRegister.setOnClickListener(this);
         return view;
     }
 
     private void onRegister() {
-        // TODO register
+        // TODO validate user input
+        String username = mAccount.getText().toString();
+        String password = mPassword.getText().toString();
+        String passwordRepeat = mPasswordConfirm.getText().toString();
+        String email = mEMail.getText().toString();
+        if (!password.equals(passwordRepeat)) {
+            ToastUtil.toast(getActivity(), R.string.message_password_not_match);
+            return;
+        }
+        LoadingUtil.showLoading(getActivity(), R.string.message_loading_register);
+        UserClient.signup(username, password, email, getActivity(), new JsonHttpResponseHandler("UTF-8") {
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                LoadingUtil.hideLoading(getActivity());
+                if (!isAdded()) {
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                LoadingUtil.hideLoading(getActivity());
+                if (!isAdded()) {
+                    return;
+                }
+            }
+
+        });
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_register:
+            case R.id.register:
                 onRegister();
                 break;
         }

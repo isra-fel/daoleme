@@ -1,7 +1,6 @@
 package cn.edu.fudan.daoleme.adapter;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,21 +9,22 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Date;
 import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
-import cn.edu.fudan.daoleme.database.pojo.Express;
+import cn.edu.fudan.daoleme.data.pojo.Delivery;
 
 /**
  * Created by rinnko on 2015/11/15.
  */
-public class ExpressListAdapter extends ArrayAdapter<Express>  {
-    private static final String TAG = "ExpressListAdapter";
+public class DeliveryListAdapter extends ArrayAdapter<Delivery>  {
+    private static final String TAG = "DeliveryListAdapter";
 
     private ListView mListView;
 
-    public ExpressListAdapter(Context context, List<Express> expressList, ListView listView) {
-        super(context, R.layout.layout_express_item, expressList);
+    public DeliveryListAdapter(Context context, List<Delivery> deliveryList, ListView listView) {
+        super(context, R.layout.layout_delivery_item, deliveryList);
         mListView = listView;
     }
 
@@ -35,22 +35,22 @@ public class ExpressListAdapter extends ArrayAdapter<Express>  {
             holder = (ViewHolder)convertView.getTag();
         } else {
             LayoutInflater inflater = (LayoutInflater)getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            RelativeLayout layout = (RelativeLayout)inflater.inflate(R.layout.layout_express_item, parent, false);
+            RelativeLayout layout = (RelativeLayout)inflater.inflate(R.layout.layout_delivery_item, parent, false);
             holder = new ViewHolder();
-            holder.name = (TextView)layout.findViewById(R.id.express_company);
-            holder.tag = (TextView)layout.findViewById(R.id.express_tag);
-            holder.detail = (TextView)layout.findViewById(R.id.express_detail);
-            holder.lastUpdate = (TextView)layout.findViewById(R.id.express_last_update);
+            holder.expressCompany = (TextView)layout.findViewById(R.id.express_company);
+            holder.tag = (TextView)layout.findViewById(R.id.tag);
+            holder.stateSummary = (TextView)layout.findViewById(R.id.state_summary);
+            holder.date = (TextView)layout.findViewById(R.id.date);
             layout.setTag(holder);
          // cause onItemClickListener not work
          //   layout.setLongClickable(true);
             convertView = layout;
         }
-        Express express = getItem(position);
-        holder.name.setText(express.name);
-        holder.tag.setText(express.tag);
-        holder.detail.setText(express.history.toString());
-        holder.lastUpdate.setText(express.history.get(express.history.size() - 1).date.toString());
+        Delivery delivery = getItem(position);
+        holder.expressCompany.setText(delivery.expressCompanyName);
+        holder.tag.setText(delivery.tag);
+        holder.stateSummary.setText(delivery.state.toString());
+        holder.date.setText(new Date().toString());
         boolean isItemChecked = mListView.isItemChecked(position);
         convertView.setBackgroundResource(isItemChecked
                 ? R.drawable.bg_checked_primary
@@ -59,10 +59,10 @@ public class ExpressListAdapter extends ArrayAdapter<Express>  {
     }
 
     static class ViewHolder {
-        TextView name;
+        TextView expressCompany;
         TextView tag;
-        TextView detail;
-        TextView lastUpdate;
+        TextView stateSummary;
+        TextView date;
     }
 
 }

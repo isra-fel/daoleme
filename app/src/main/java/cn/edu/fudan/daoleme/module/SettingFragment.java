@@ -1,17 +1,22 @@
 package cn.edu.fudan.daoleme.module;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import cn.edu.fudan.daoleme.R;
+import cn.edu.fudan.daoleme.data.constant.Preferences;
+import cn.edu.fudan.daoleme.data.pojo.Setting;
+import cn.edu.fudan.daoleme.util.SessionUtil;
 
 /**
  * Created by rinnko on 2015/11/14.
  */
-public class SettingFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener {
+public class SettingFragment extends PreferenceFragment implements Preference.OnPreferenceClickListener, SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String TAG = "SettingFragment";
 
     private Preference mAbout, mUpdate;
@@ -20,10 +25,17 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.setting_general);
-        mAbout = findPreference(getString(R.string.preference_about));
+        mAbout = findPreference(Preferences.Key.SETTING_KEY_ABOUT);
         mAbout.setOnPreferenceClickListener(this);
-        mUpdate = findPreference(getString(R.string.preference_update));
+        mUpdate = findPreference(Preferences.Key.SETTING_KEY_UPDATE);
         mUpdate.setOnPreferenceClickListener(this);
+        PreferenceManager.getDefaultSharedPreferences(getActivity()).registerOnSharedPreferenceChangeListener(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(getActivity()).unregisterOnSharedPreferenceChangeListener(this);
     }
 
     private void onQueryUpdate() {
@@ -42,4 +54,17 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         }
         return true;
     }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        Setting setting = SessionUtil.getSession(getActivity()).getSetting();
+        if (key.equals(Preferences.Key.SETTING_OPEN_WALLPAPER_NOTIFY)) {
+            setting.openWallpaperNotify = sharedPreferences.getBoolean(Preferences.Key.SETTING_OPEN_WALLPAPER_NOTIFY, true);
+        } else if (key.equals(Preferences.Key.SETTING_NOTIFY_IF_FAVORITE_DEFAULT)) {
+            setting.notifyIfFavoriteDefault = sharedPreferences.getBoolean(Preferences.Key.SETTING_NOTIFY_IF_FAVORITE_DEFAULT, true);
+        } else if (key.equals(Preferences.Key.SETTING_POLL_FREQUENCY)) {
+            setting.pollFrequency = Integer.parseInt(sharedPreferences.getString(Preferences.Key.SETTING_POLL_FREQUENCY, "1"));
+        }
+    }
+
 }
