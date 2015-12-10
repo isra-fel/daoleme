@@ -1,9 +1,110 @@
-<!DOCTYPE>
+<!DOCTYPE html>
 <html>
-    <head>
-        <title>about</title>
-    </head>
-    <body>
-        <h1>THIS IS ABOUT PAGE</h1>
-    </body>
+<head>
+    <title>About</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * {
+        margin: 0;
+        padding: 0;
+        }
+        body {
+        text-align: center;
+        padding-top: 50px;
+        background-color: whitesmoke;
+        }
+        #logo {
+        width: 200px;
+        height: 200px;
+        }
+        #label-producers {
+        font-size: xx-large;
+        margin-top: 30px;
+        font-family: cursive;
+        }
+        .name-list {
+        margin-bottom: 30px;
+        }
+        .name {
+        margin-top: 20px;
+        font-weight: normal;
+        font-family: cursive;
+        }
+        #yxw, #yxw:visited {
+        color: #000099;
+        }
+        #cxt, #cxt:visited {
+        color: #CC3366;
+        }
+        #sdw, #sdw:visited {
+        color: rgb(227, 196, 131);
+        }
+        #ymt, #ymt:visited {
+        color: #FFCCCC;
+        }
+        #lym, #lym:visited {
+        color: #FFFC00;
+        }
+        #hr, #hr:visited {
+        color: #996600;
+        }
+        a {
+        text-decoration: none;
+        }
+    </style>
+    <script>
+			window.onload = function () {
+				var logo = document.getElementById('logo'),
+					h360 = 0;
+				
+				function nextShadow() {
+					h360 += 5; 
+					var h = h360 % 360;
+					var rgb = HSVtoRGB(h / 360, 0.6, 1);
+					return '2px 2px 30px 10px rgb(' + rgb.r + ', ' + rgb.g + ', ' + rgb.b + ')';
+				}
+				
+				function HSVtoRGB(h, s, v) {
+					var r, g, b, i, f, p, q, t;
+					if (arguments.length === 1) {
+						s = h.s, v = h.v, h = h.h;
+					}
+					i = Math.floor(h * 6);
+					f = h * 6 - i;
+					p = v * (1 - s);
+					q = v * (1 - f * s);
+					t = v * (1 - (1 - f) * s);
+					switch (i % 6) {
+						case 0: r = v, g = t, b = p; break;
+						case 1: r = q, g = v, b = p; break;
+						case 2: r = p, g = v, b = t; break;
+						case 3: r = p, g = q, b = v; break;
+						case 4: r = t, g = p, b = v; break;
+						case 5: r = v, g = p, b = q; break;
+					}
+					return {
+						r: Math.round(r * 255),
+						g: Math.round(g * 255),
+						b: Math.round(b * 255)
+					};
+				}
+				
+				setInterval(function () {
+					logo.style.boxShadow = nextShadow();
+				}, 100);
+			}
+		</script>
+</head>
+<body>
+<img id="logo" alt="logo" src="logo.png" />
+<h2 id="label-producers">{ Producers }</h2>
+<div class="name-list">
+    <h3 class="name"><a href="#" id="yxw">Yang Xiaowei</a></h3>
+    <h3 class="name"><a href="#" id="cxt">Chen Xintian</a></h3>
+    <h3 class="name"><a href="#" id="sdw">Shu Dingwen</a></h3>
+    <h3 class="name"><a href="#" id="ymt">Yue Mingtao</a></h3>
+    <h3 class="name"><a href="http://weibo.com/whynotme" id="lym">Liu Yeming</a></h3>
+    <h3 class="name"><a href="#" id="hr">He Rui</a></h3>
+</div>
+</body>
 </html>
