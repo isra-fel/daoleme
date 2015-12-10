@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
+    <instrumentation
+        android:name="android.test.InstrumentationTestRunner"
+        android:targetPackage="cn.edu.fudan.daoleme"></instrumentation>
+
     <application
         android:name=".DLMApplication"
         android:allowBackup="true"
