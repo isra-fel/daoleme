@@ -1,5 +1,6 @@
 package cn.edu.fudan.daoleme.module;
 
+import android.app.Application;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -74,7 +75,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 if (!isAdded()) {
                     return;
                 }
-                ToastUtil.toast(getActivity(), R.string.message_login_fail);
+                ToastUtil.toast(R.string.message_login_fail);
             }
 
         });

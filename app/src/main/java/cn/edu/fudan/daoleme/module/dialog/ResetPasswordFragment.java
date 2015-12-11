@@ -1,5 +1,6 @@
 package cn.edu.fudan.daoleme.module.dialog;
 
+import android.app.Application;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -50,7 +51,7 @@ public class ResetPasswordFragment extends DialogFragment implements View.OnClic
         String newPassword = mNewPassword.getText().toString();
         String repeatPassword = mConfirmPassword.getText().toString();
         if (!newPassword.equals(repeatPassword)) {
-            ToastUtil.toast(this, R.string.message_password_not_match);
+            ToastUtil.toast(R.string.message_password_not_match);
             return;
         }
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_reset_password);
@@ -60,7 +61,7 @@ public class ResetPasswordFragment extends DialogFragment implements View.OnClic
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 LoadingUtil.hideLoading(getActivity());
                 if (isAdded()) {
-                    ToastUtil.toast(ResetPasswordFragment.this, R.string.message_reset_password_success);
+                    ToastUtil.toast(R.string.message_reset_password_success);
                 }
             }
 
@@ -68,7 +69,7 @@ public class ResetPasswordFragment extends DialogFragment implements View.OnClic
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
                 LoadingUtil.hideLoading(getActivity());
                 if (isAdded()) {
-                    ToastUtil.toast(ResetPasswordFragment.this, R.string.message_reset_password_fail);
+                    ToastUtil.toast(R.string.message_reset_password_fail);
                 }
             }
         });

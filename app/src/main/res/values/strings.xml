@@ -72,4 +72,10 @@
     <string name="message_logout_success">登出成功</string>
     <string name="message_logout_fail">登出失败</string>
     <string name="message_loading_query">正在查询</string>
+    <string name="message_delete_success">删除成功</string>
+    <string name="message_delete_fail">删除失败</string>
+    <string name="message_loading_delete">删除中</string>
+    <string name="message_edit_success">修改成功</string>
+    <string name="message_edit_fail">修改失败</string>
+    <string name="message_loading_edit">修改中</string>
 </resources>

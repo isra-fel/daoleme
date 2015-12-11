@@ -20,12 +20,12 @@
         <TextView
             style="@style/BaseLabel"
             android:text="@string/from"
-            android:labelFor="@id/express_from"/>
+            android:labelFor="@id/from"/>
 
         <EditText
             style="@style/BaseEditText"
             android:layout_width="match_parent"
-            android:id="@+id/express_from"
+            android:id="@+id/from"
             android:hint="@string/from_example" />
 
     </LinearLayout>
@@ -40,12 +40,12 @@
         <TextView
             style="@style/BaseLabel"
             android:text="@string/to"
-            android:labelFor="@id/express_to"/>
+            android:labelFor="@id/to"/>
 
         <EditText
             style="@style/BaseEditText"
             android:layout_width="match_parent"
-            android:id="@+id/express_to"
+            android:id="@+id/to"
             android:hint="@string/to_example" />
 
     </LinearLayout>

@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import cn.edu.fudan.daoleme.R;
 
@@ -19,6 +20,8 @@ public class SingleFragmentActivity extends AppCompatActivity {
     private static final String TAG = "SingleFragmentActivity";
 
     private View.OnKeyListener mOnKeyListener;
+
+    protected Fragment mContentFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,13 +49,15 @@ public class SingleFragmentActivity extends AppCompatActivity {
 
         try {
             Fragment clazzInstance = clazz.newInstance();
+            mContentFragment = clazzInstance;
             if (clazzInstance instanceof View.OnKeyListener) {
                 mOnKeyListener = (View.OnKeyListener)clazzInstance;
             }
-            FragmentTransaction transaction = getFragmentManager().beginTransaction().replace(R.id.fragment_container, clazzInstance);
-            transaction.addToBackStack(TAG);
-            // see http://blog.csdn.net/stoppig/article/details/31776607
-            transaction.commit();
+            getFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, clazzInstance, TAG)
+                    .addToBackStack(TAG)
+                    .commit();
         // API level 14 is not allowed multi-catch clause with reflection
         } catch (InstantiationException e) {
             e.printStackTrace();

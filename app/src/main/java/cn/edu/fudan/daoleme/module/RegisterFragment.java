@@ -1,5 +1,6 @@
 package cn.edu.fudan.daoleme.module;
 
+import android.app.Application;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -45,7 +46,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         String passwordRepeat = mPasswordConfirm.getText().toString();
         String email = mEMail.getText().toString();
         if (!password.equals(passwordRepeat)) {
-            ToastUtil.toast(getActivity(), R.string.message_password_not_match);
+            ToastUtil.toast(R.string.message_password_not_match);
             return;
         }
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_register);

@@ -35,7 +35,7 @@
 
         <TextView
             style="@style/TextItemContent"
-            android:id="@+id/express_from" />
+            android:id="@+id/from" />
 
         <!-- to -->
         <TextView
@@ -44,7 +44,7 @@
 
         <TextView
             style="@style/TextItemContent"
-            android:id="@+id/express_to" />
+            android:id="@+id/to" />
 
         <!-- receiver -->
         <TextView
@@ -53,18 +53,18 @@
 
         <TextView
             style="@style/TextItemContent"
-            android:id="@+id/express_receiver" />
+            android:id="@+id/receiver" />
 
         <!-- state -->
         <TextView
             style="@style/BaseLabel"
-            android:text="@string/express_status"/>
+            android:text="@string/delivery_state"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/express_history">
+            android:id="@+id/delivery_state">
         </LinearLayout>
 
     </LinearLayout>

@@ -10,6 +10,8 @@ public class Delivery {
     public String expressCompanyName;
     public String id;
     public String tag;
+    public boolean isPinned;
+    public boolean isReceived;
     public List<String> state;
 
 }

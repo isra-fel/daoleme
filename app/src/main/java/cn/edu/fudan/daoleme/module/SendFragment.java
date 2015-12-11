@@ -31,8 +31,8 @@ public class SendFragment extends Fragment implements View.OnClickListener {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         mExpressCompany.setAdapter(arrayAdapter);
-        mFrom = (EditText)view.findViewById(R.id.express_from);
-        mTo = (EditText)view.findViewById(R.id.express_to);
+        mFrom = (EditText)view.findViewById(R.id.from);
+        mTo = (EditText)view.findViewById(R.id.to);
         View btnQuery = view.findViewById(R.id.query);
         btnQuery.setOnClickListener(this);
 
