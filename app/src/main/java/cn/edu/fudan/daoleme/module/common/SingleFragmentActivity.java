@@ -53,6 +53,10 @@ public class SingleFragmentActivity extends AppCompatActivity {
             if (clazzInstance instanceof View.OnKeyListener) {
                 mOnKeyListener = (View.OnKeyListener)clazzInstance;
             }
+            Bundle bundle = getIntent().getExtras();
+            if (bundle != null) {
+                clazzInstance.setArguments(bundle);
+            }
             getFragmentManager()
                     .beginTransaction()
                     .replace(R.id.fragment_container, clazzInstance, TAG)

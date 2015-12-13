@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,6 +42,8 @@ public class DeliveryListAdapter extends ArrayAdapter<Delivery>  {
             holder.tag = (TextView)layout.findViewById(R.id.tag);
             holder.stateSummary = (TextView)layout.findViewById(R.id.state_summary);
             holder.date = (TextView)layout.findViewById(R.id.date);
+            holder.isPinned = (ImageView)layout.findViewById(R.id.ic_pinned);
+            holder.isReceived = (ImageView)layout.findViewById(R.id.ic_received);
             layout.setTag(holder);
          // cause onItemClickListener not work
          //   layout.setLongClickable(true);
@@ -51,6 +54,12 @@ public class DeliveryListAdapter extends ArrayAdapter<Delivery>  {
         holder.tag.setText(delivery.tag);
         holder.stateSummary.setText(delivery.state.toString());
         holder.date.setText(new Date().toString());
+        if (!delivery.isPinned) {
+            holder.isPinned.setVisibility(View.GONE);
+        }
+        if (!delivery.isReceived) {
+            holder.isReceived.setVisibility(View.GONE);
+        }
         boolean isItemChecked = mListView.isItemChecked(position);
         convertView.setBackgroundResource(isItemChecked
                 ? R.drawable.bg_checked_primary
@@ -63,6 +72,8 @@ public class DeliveryListAdapter extends ArrayAdapter<Delivery>  {
         TextView tag;
         TextView stateSummary;
         TextView date;
+        ImageView isPinned;
+        ImageView isReceived;
     }
 
 }

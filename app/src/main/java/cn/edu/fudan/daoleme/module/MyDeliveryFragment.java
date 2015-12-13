@@ -68,6 +68,8 @@ public class MyDeliveryFragment extends Fragment implements
             Delivery delivery = new Delivery();
             delivery.expressCompanyName = "Company";
             delivery.tag = "tag";
+            delivery.isReceived = true;
+            delivery.isPinned = true;
             delivery.state = new ArrayList<>();
             delivery.state.add("asdfasdfasdfas");
             deliveryList.add(delivery);
@@ -86,8 +88,10 @@ public class MyDeliveryFragment extends Fragment implements
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (!mMultiChoiceMode) {
             Intent intent = new Intent(getActivity(), DeliveryDetailActivity.class);
+            Bundle bundle = new Bundle();
             // TODO pass express_id
-            intent.putExtra("express_id", "express_id");
+            bundle.putString("deliveryId", mAdapter.getItem(position).id);
+            intent.putExtras(bundle);
             startActivity(intent);
         } else {
             mAdapter.notifyDataSetChanged();
