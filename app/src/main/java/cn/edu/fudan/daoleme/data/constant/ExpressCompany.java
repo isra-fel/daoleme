@@ -9,7 +9,10 @@ import cn.edu.fudan.daoleme.R;
  */
 public enum ExpressCompany {
     yuantong(R.string.express_company_yuantong),
-    shunfeng(R.string.express_company_shunfeng);
+    shunfeng(R.string.express_company_shunfeng),
+    shentong(R.string.express_company_shentong),
+    yunda(R.string.express_company_yunda),
+    zhongtong(R.string.express_company_zhongtong);
 
     private int mResId;
 

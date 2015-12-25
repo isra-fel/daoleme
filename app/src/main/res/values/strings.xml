@@ -79,4 +79,7 @@
 
     <string name="express_company_shunfeng">顺丰</string>
     <string name="express_company_yuantong">圆通</string>
+    <string name="express_company_shentong">申通</string>
+    <string name="express_company_zhongtong">中通</string>
+    <string name="express_company_yunda">韵达</string>
 </resources>
