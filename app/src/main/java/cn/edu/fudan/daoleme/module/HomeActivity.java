@@ -1,5 +1,7 @@
 package cn.edu.fudan.daoleme.module;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -17,6 +19,9 @@ import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
 import cn.edu.fudan.daoleme.adapter.HomePagerAdapter;
+import cn.edu.fudan.daoleme.data.dao.Session;
+import cn.edu.fudan.daoleme.service.LockScreenService;
+import cn.edu.fudan.daoleme.service.TimeRefreshService;
 import cn.edu.fudan.daoleme.util.SessionUtil;
 
 /**
@@ -35,14 +40,18 @@ public class HomeActivity extends AppCompatActivity implements
     private int mColorNormal, mColorActive;
     private int mIndexCurrentTab; // start from 0, 0->mTabReceive, 1->mTabSend, 2->mTabMe
 
+    private static Context mContext = null ;
+    public static Context getContext() {
+        return mContext;
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         checkLogin();
 
         // inflate layout
         super.onCreate(savedInstanceState);
+        mContext = HomeActivity.this;
         setContentView(R.layout.activity_home);
-
         // setup toolbar for material design
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -75,6 +84,8 @@ public class HomeActivity extends AppCompatActivity implements
         mColorNormal = getResources().getColor(R.color.tab_color);
         mColorActive = getResources().getColor(R.color.tab_color_active);
 
+        startService(new Intent(HomeActivity.this, LockScreenService.class));
+        TimeRefreshService.setPeriod(SessionUtil.getSession(HomeActivity.this).IsWallpaperNotifyOpen(),SessionUtil.getSession(HomeActivity.this).getPollFrequency()*60*1000);
     }
 
     private void checkLogin() {

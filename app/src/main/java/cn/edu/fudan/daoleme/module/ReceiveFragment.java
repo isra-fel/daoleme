@@ -20,6 +20,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cn.edu.fudan.daoleme.R;
+import cn.edu.fudan.daoleme.data.constant.ExpressCompany;
 import cn.edu.fudan.daoleme.data.pojo.Delivery;
 import cn.edu.fudan.daoleme.module.dialog.QueryDeliveryResultFragment;
 import cn.edu.fudan.daoleme.net.APIClient;
@@ -59,7 +60,7 @@ public class ReceiveFragment extends Fragment implements View.OnClickListener {
     private void onQuery() {
 
         // TODO validate input
-        String company = (String)mExpressCompany.getSelectedItem();
+        String company = convertBack((String) mExpressCompany.getSelectedItem());
         String deliveryId = mDeliveryId.getText().toString();
 
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_query);
@@ -84,11 +85,22 @@ public class ReceiveFragment extends Fragment implements View.OnClickListener {
 
     }
 
+    private String convertBack(String selectedItem) {
+        if (selectedItem.equals("圆通")) {
+            return ExpressCompany.yuantong.getCompanyId();
+        }
+        if (selectedItem.equals("顺丰")) {
+            return ExpressCompany.shunfeng.getCompanyId();
+        }
+        throw new IllegalArgumentException("Should be a company name: " + selectedItem);
+    }
+
     private void onQuerySuccess(JSONObject data) throws JSONException {
 
         if (!isAdded()) {
             return;
         }
+        System.out.println(data.toString());
 
         //sample data: {"message":"ok","nu":"700074134800","ischeck":"1","com":"yuantong","status":"200","condition":"F00","state":"3",
         // "data":[{"time":"2015-11-26 19:09:25","context":"客户 签收人: 近邻宝代收点 已签收  感谢使用圆通速递，期待再次为您服务","ftime":"2015-11-26 19:09:25"},

@@ -1,6 +1,7 @@
 package cn.edu.fudan.daoleme.module.dialog;
 
 import android.app.Dialog;
+import android.content.ContentValues;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.app.DialogFragment;
@@ -10,8 +11,18 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import cn.edu.fudan.daoleme.R;
+import cn.edu.fudan.daoleme.data.DeliveryProvider;
+import cn.edu.fudan.daoleme.data.constant.ExpressCompany;
 import cn.edu.fudan.daoleme.data.pojo.Delivery;
+import cn.edu.fudan.daoleme.net.DeliveryClient;
+import cn.edu.fudan.daoleme.util.SessionUtil;
+import cz.msebera.android.httpclient.Header;
 
 /**
  * Created by rinnko on 2015/12/9.
@@ -43,9 +54,9 @@ public class QueryDeliveryResultFragment extends DialogFragment implements View.
         View btnPin = view.findViewById(R.id.pin);
         View btnCancel = view.findViewById(R.id.cancel);
 
-        mExpressCompany.setText(mDelivery.getExpressCompanyName());
+        mExpressCompany.setText(ExpressCompany.valueOf(mDelivery.getExpressCompanyName()).getString(getActivity()));
         mDeliveryId.setText(mDelivery.getId());
-        mTag.setText(mDelivery.getTag());
+        mTag.setText((mDelivery.getTag()).isEmpty() ? getString(R.string.unset) : mDelivery.getTag());
 
         btnMark.setOnClickListener(this);
         btnPin.setOnClickListener(this);
@@ -82,7 +93,28 @@ public class QueryDeliveryResultFragment extends DialogFragment implements View.
 
 
     private void onMark() {
-        // TODO mark
+        saveDeliveryToLocalDB();
+        saveDeliveryToServer();
+        dismiss();
+    }
+
+    private void saveDeliveryToServer() {
+        DeliveryClient.favor(SessionUtil.getSession(getActivity()).getUser().getId(), mDelivery, getActivity(), new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                super.onSuccess(statusCode, headers, response);
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                super.onFailure(statusCode, headers, throwable, errorResponse);
+            }
+        });
+    }
+
+    private void saveDeliveryToLocalDB() {
+        ContentValues contentValues = mDelivery.toContentValues();
+        getActivity().getContentResolver().insert(DeliveryProvider.CONTENT_URI, contentValues);
     }
 
 }
