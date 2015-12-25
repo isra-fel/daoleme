@@ -9,13 +9,15 @@ public class DeliveryDBHelper extends SQLiteOpenHelper{
 	public static final String TABLE_NAME = "delivery";
 	public static final String KEY_ID = "_id";
 	public static final String KEY_EXPRESS = "express";
+	public static final String KEY_TAG = "express";
 	public static final String KEY_IS_PINNED = "pinned";
 	public static final String KEY_IS_RECEIVED = "received";
 	public static final String KEY_STATE = "state";
 	private static final String CREATE_SQL = "create table " + 
 		TABLE_NAME + "(" +
-		KEY_ID + " integer primary key, " +
+		KEY_ID + " text primary key, " +
 		KEY_EXPRESS + " text, " +
+		KEY_TAG + " text, " +
 		KEY_IS_PINNED + " integer, " +
 		KEY_IS_RECEIVED + " integer, " +
 		KEY_STATE + " text)";
