@@ -24,9 +24,9 @@
         <EditText
             style="@style/BaseEditText"
             android:layout_width="match_parent"
-            android:inputType="number"
             android:id="@+id/delivery_id"
-            android:hint="@string/delivery_id" />
+            android:hint="@string/delivery_id"
+            android:inputType="text" />
 
     </LinearLayout>
 

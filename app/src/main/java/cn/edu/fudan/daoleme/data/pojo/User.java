@@ -41,4 +41,14 @@ public class User {
     public void setToken(String token) {
         this.token = token;
     }
+
+    public User(long id, String name, String email, String token) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.token = token;
+    }
+
+    public User() {
+    }
 }

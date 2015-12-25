@@ -59,7 +59,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void onNewDeliveryClick(View view) {
-        Delivery delivery = new Delivery(ExpressCompany.YuanTong, "A09138121", "", false, false, null);
+        Delivery delivery = new Delivery(ExpressCompany.yuantong.getCompanyId(), "A09138121", "", false, false, null);
         DeliveryClient.favor(3, delivery, TestActivity.this, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

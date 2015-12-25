@@ -13,6 +13,8 @@ import android.widget.Spinner;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -66,7 +68,11 @@ public class ReceiveFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 LoadingUtil.hideLoading(getActivity());
-                onQuerySuccess(response);
+                try {
+                    onQuerySuccess(response);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
@@ -78,19 +84,33 @@ public class ReceiveFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void onQuerySuccess(JSONObject data) {
+    private void onQuerySuccess(JSONObject data) throws JSONException {
 
         if (!isAdded()) {
             return;
         }
 
+        //sample data: {"message":"ok","nu":"700074134800","ischeck":"1","com":"yuantong","status":"200","condition":"F00","state":"3",
+        // "data":[{"time":"2015-11-26 19:09:25","context":"客户 签收人: 近邻宝代收点 已签收  感谢使用圆通速递，期待再次为您服务","ftime":"2015-11-26 19:09:25"},
+        // {"time":"2015-11-25 23:09:16","context":"北京市海淀区学清路公司(点击查询电话)n** 派件中 派件员电话17710861559","ftime":"2015-11-25 23:09:16"},
+        // {"time":"2015-11-18 21:18:01","context":"北京市海淀区学清路公司 已收入","ftime":"2015-11-18 21:18:01"},
+        // {"time":"2015-11-18 10:01:23","context":"北京转运中心 已发出,下一站 北京市海淀区学清路","ftime":"2015-11-18 10:01:23"},
+        // {"time":"2015-11-18 09:59:05","context":"北京转运中心 已拆包","ftime":"2015-11-18 09:59:05"},
+        // {"time":"2015-11-18 09:26:46","context":"北京转运中心 已收入","ftime":"2015-11-18 09:26:46"},
+        // {"time":"2015-11-17 02:17:55","context":"郑州转运中心 已发出,下一站 北京转运中心","ftime":"2015-11-17 02:17:55"},
+        // {"time":"2015-11-17 02:17:49","context":"郑州转运中心 已收入","ftime":"2015-11-17 02:17:49"},
+        // {"time":"2015-11-16 23:35:13","context":"河南省郑州市中原区公司 已发出,下一站 郑州转运中心","ftime":"2015-11-16 23:35:13"},
+        // {"time":"2015-11-14 00:39:49","context":"虎门转运中心 已发出,下一站 北京转运中心","ftime":"2015-11-14 00:39:49"},
+        // {"time":"2015-11-14 00:10:34","context":"虎门转运中心 已收入","ftime":"2015-11-14 00:10:34"},
+        // {"time":"2015-11-13 22:49:28","context":"广东省东莞市新东城公司 已发出,下一站 虎门转运中心","ftime":"2015-11-13 22:49:28"},
+        // {"time":"2015-11-13 19:36:20","context":"广东省东莞市新东城公司 已打包","ftime":"2015-11-13 19:36:20"},
+        // {"time":"2015-11-13 12:08:51","context":"广东省东莞市新东城公司(点击查询电话) 已揽收","ftime":"2015-11-13 12:08:51"}]}
         // TODO parse data to delivery
-        Delivery delivery = new Delivery();
-        delivery.setExpressCompanyName("company");
-        delivery.setId("123113123121231231");
-        delivery.setTag("tag");
-        delivery.setState(new ArrayList<String>());
-        delivery.addState("asdfsafasdfasdfasdfsadfs");
+        Delivery delivery = new Delivery(data.getString("com"), data.getString("nu"), "", false, false, new ArrayList<String>());
+        JSONArray history = data.getJSONArray("data");
+        for (int i = 0; i < history.length(); ++i) {
+            delivery.addState(history.getJSONObject(i).getString("context"));
+        }
 
         if (mQueryDeliveryResultFragment == null) {
             mQueryDeliveryResultFragment = new QueryDeliveryResultFragment();

@@ -32,11 +32,11 @@ public class DeliveryDetailFragment extends Fragment {
 
     private Delivery mDelivery;
     private Menu mMenu;
-    private long userId = SessionUtil.getSession(getActivity()).getUser().getId();
+    private long userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        userId = SessionUtil.getSession(getActivity()).getUser().getId();
         mDelivery = getDeliveryById(getArguments().getString("deliveryId"));
 
         View view = inflater.inflate(R.layout.fragment_delivery_detail, container, false);

@@ -15,13 +15,17 @@ import android.widget.Toast;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.fudan.daoleme.R;
+import cn.edu.fudan.daoleme.data.dao.Session;
+import cn.edu.fudan.daoleme.data.pojo.User;
 import cn.edu.fudan.daoleme.module.dialog.ForgetPasswordFragment;
 import cn.edu.fudan.daoleme.module.dialog.LoadingFragment;
 import cn.edu.fudan.daoleme.net.UserClient;
 import cn.edu.fudan.daoleme.util.LoadingUtil;
+import cn.edu.fudan.daoleme.util.SessionUtil;
 import cn.edu.fudan.daoleme.util.ToastUtil;
 import cz.msebera.android.httpclient.Header;
 
@@ -51,7 +55,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private void onLogin() {
 
         // TODO validate user input
-        String username = mAccount.getText().toString();
+        final String username = mAccount.getText().toString();
         String password = mPassword.getText().toString();
 
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_login);
@@ -64,8 +68,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 if (!isAdded()) {
                     return;
                 }
+
+                try {
+                    User user = new User(response.getJSONObject("returnData").getLong("currentUser"), username, "", "");
+                    SessionUtil.getSession(getActivity()).setUser(getActivity(), user);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Intent intent = new Intent(getActivity(), HomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }
 

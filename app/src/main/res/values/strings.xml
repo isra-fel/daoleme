@@ -17,8 +17,6 @@
     <string name="query">查询</string>
     <string name="search_delivery_title">输入快递信息</string>
     <string name="search_express_title">查找快递网点</string>
-    <string name="express_company_shunfeng">顺丰</string>
-    <string name="express_company_yuantong">圆通</string>
     <string name="from">出发地</string>
     <string name="to">目的地</string>
     <string name="from_example">XX</string>
@@ -78,4 +76,7 @@
     <string name="message_edit_success">修改成功</string>
     <string name="message_edit_fail">修改失败</string>
     <string name="message_loading_edit">修改中</string>
+
+    <string name="express_company_shunfeng">顺丰</string>
+    <string name="express_company_yuantong">圆通</string>
 </resources>

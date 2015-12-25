@@ -94,16 +94,21 @@ public class MeFragment extends Fragment implements View.OnClickListener {
                     if (!isAdded()) {
                         return;
                     }
-                    mUserAvatar.setImageResource(R.drawable.ic_action_user);
-                    mUserId.setText("nil");
-                    mUserName.setText("nil");
-                    mVMyExpress.setVisibility(View.GONE);
-                    mVResetPassword.setVisibility(View.GONE);
-                    mLogoutText.setText(getString(R.string.login));
+//                    mUserAvatar.setImageResource(R.drawable.ic_action_user);
+//                    mUserId.setText("nil");
+//                    mUserName.setText("nil");
+//                    mVMyExpress.setVisibility(View.GONE);
+//                    mVResetPassword.setVisibility(View.GONE);
+//                    mLogoutText.setText(getString(R.string.login));
                     Toast.makeText(
                             activity.getApplicationContext()
                             , getString(R.string.message_logout_success)
                             , Toast.LENGTH_SHORT).show();
+
+                    Intent intent;
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 }
 
                 @Override

@@ -1,5 +1,6 @@
 package cn.edu.fudan.daoleme.module;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v13.app.FragmentPagerAdapter;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
 import cn.edu.fudan.daoleme.adapter.HomePagerAdapter;
+import cn.edu.fudan.daoleme.util.SessionUtil;
 
 /**
  * Created by rinnko on 2015/11/9.
@@ -25,6 +27,8 @@ public class HomeActivity extends AppCompatActivity implements
         ViewPager.OnPageChangeListener {
     private static final String TAG = "HomeActivity";
 
+    private static final int REQUEST_LOGIN  = 11;
+
     private ImageView mIconReceive, mIconSend, mIconMe;
     private TextView mTextReceive, mTextSend, mTextMe;
     private ViewPager mPager;
@@ -33,6 +37,7 @@ public class HomeActivity extends AppCompatActivity implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        checkLogin();
 
         // inflate layout
         super.onCreate(savedInstanceState);
@@ -70,6 +75,15 @@ public class HomeActivity extends AppCompatActivity implements
         mColorNormal = getResources().getColor(R.color.tab_color);
         mColorActive = getResources().getColor(R.color.tab_color_active);
 
+    }
+
+    private void checkLogin() {
+        if (!SessionUtil.getSession(this).isLogin()) {
+            Intent intent;
+            intent = new Intent(this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivityForResult(intent, REQUEST_LOGIN);
+        }
     }
 
     private void setCurrentTab(int tabIndex) {
@@ -123,6 +137,11 @@ public class HomeActivity extends AppCompatActivity implements
                 setCurrentTab(2);
                 break;
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

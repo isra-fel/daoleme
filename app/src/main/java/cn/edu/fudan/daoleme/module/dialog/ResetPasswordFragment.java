@@ -26,13 +26,14 @@ import cz.msebera.android.httpclient.Header;
  */
 public class ResetPasswordFragment extends DialogFragment implements View.OnClickListener {
     private static final String TAG = "ResetPasswordFragment";
-    private long userId = SessionUtil.getSession(getActivity()).getUser().getId();
+    private long userId;
 
     private EditText mOldPassword, mNewPassword, mConfirmPassword;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_reset_password, container, false);
+        userId = SessionUtil.getSession(getActivity()).getUser().getId();
         mOldPassword = (EditText)view.findViewById(R.id.old_password);
         mNewPassword = (EditText)view.findViewById(R.id.new_password);
         mConfirmPassword = (EditText)view.findViewById(R.id.confirm_password);

@@ -1,11 +1,27 @@
 package cn.edu.fudan.daoleme.data.constant;
 
+import android.content.Context;
+
+import cn.edu.fudan.daoleme.R;
+
 /**
  * Created by felix on 2015/12/25.
  */
-public final class ExpressCompany {
-    public static final String YuanTong = "yuantong";
-    public static final String ZhongTong = "zhongtong";
-    public static final String ShunFeng = "shunfeng";
-    public static final String ShenTong = "shentong";
+public enum ExpressCompany {
+    yuantong(R.string.express_company_yuantong),
+    shunfeng(R.string.express_company_shunfeng);
+
+    private int mResId;
+
+    public String getString(Context context) {
+        return context.getString(mResId);
+    }
+
+    public String getCompanyId() {
+        return name();
+    }
+
+    ExpressCompany(int mResId) {
+        this.mResId = mResId;
+    }
 }
