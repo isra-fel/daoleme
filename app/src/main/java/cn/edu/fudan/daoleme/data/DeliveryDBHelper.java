@@ -9,7 +9,7 @@ public class DeliveryDBHelper extends SQLiteOpenHelper{
 	public static final String TABLE_NAME = "delivery";
 	public static final String KEY_ID = "_id";
 	public static final String KEY_EXPRESS = "express";
-	public static final String KEY_TAG = "express";
+	public static final String KEY_TAG = "tag";
 	public static final String KEY_IS_PINNED = "pinned";
 	public static final String KEY_IS_RECEIVED = "received";
 	public static final String KEY_STATE = "state";

@@ -85,7 +85,7 @@ public class HomeActivity extends AppCompatActivity implements
         mColorActive = getResources().getColor(R.color.tab_color_active);
 
         startService(new Intent(HomeActivity.this, LockScreenService.class));
-        TimeRefreshService.setPeriod(SessionUtil.getSession(HomeActivity.this).IsWallpaperNotifyOpen(),SessionUtil.getSession(HomeActivity.this).getPollFrequency()*60*1000);
+        //TimeRefreshService.setPeriod(SessionUtil.getSession(HomeActivity.this).IsWallpaperNotifyOpen(),SessionUtil.getSession(HomeActivity.this).getPollFrequency()*60*1000);
     }
 
     private void checkLogin() {

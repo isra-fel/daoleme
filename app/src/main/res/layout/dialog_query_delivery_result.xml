@@ -70,7 +70,8 @@
             android:text="@string/pin"
             android:layout_toRightOf="@id/mark"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:id="@+id/pin" />
+            android:id="@+id/pin"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

@@ -76,10 +76,10 @@ public class QueryDeliveryResultFragment extends DialogFragment implements View.
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.mark:
-                onPin();
+                onMark();
                 break;
             case R.id.pin:
-                onMark();
+                onPin();
                 break;
             case R.id.cancel:
                 dismiss();

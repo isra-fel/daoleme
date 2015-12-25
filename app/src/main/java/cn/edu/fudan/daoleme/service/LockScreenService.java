@@ -35,9 +35,9 @@ public class LockScreenService extends Service {
         IntentFilter mScreenOnFilter = new IntentFilter("android.intent.action.SCREEN_ON");
         LockScreenService.this.registerReceiver(mScreenOnReceiver, mScreenOnFilter);
 
-//		/*注册广播*/
-//        IntentFilter mScreenOffFilter = new IntentFilter("android.intent.action.SCREEN_OFF");
-//        LockScreenService.this.registerReceiver(mScreenOffReceiver, mScreenOffFilter);
+		/*注册广播*/
+        IntentFilter mScreenOffFilter = new IntentFilter("android.intent.action.SCREEN_OFF");
+        LockScreenService.this.registerReceiver(mScreenOffReceiver, mScreenOffFilter);
     }
 
     public int onStartCommand(Intent intent , int flags , int startId){
@@ -49,7 +49,7 @@ public class LockScreenService extends Service {
     public void onDestroy(){
         super.onDestroy();
         LockScreenService.this.unregisterReceiver(mScreenOnReceiver);
-//        LockScreenService.this.unregisterReceiver(mScreenOffReceiver);
+        LockScreenService.this.unregisterReceiver(mScreenOffReceiver);
         //在此重新启动
         startService(new Intent(LockScreenService.this, LockScreenService.class));
     }
@@ -73,21 +73,21 @@ public class LockScreenService extends Service {
         }
     };
 
-//    private BroadcastReceiver mScreenOffReceiver = new BroadcastReceiver(){
+    private BroadcastReceiver mScreenOffReceiver = new BroadcastReceiver(){
+
+        @Override
+        public void onReceive(Context context , Intent intent) {
+
+//            Log.i(TAG, intent.getAction());
 //
-//        @Override
-//        public void onReceive(Context context , Intent intent) {
-//
-////            Log.i(TAG, intent.getAction());
-////
-////            if(intent.getAction().equals("android.intent.action.SCREEN_OFF")){
-////                Log.i(TAG, "----------------- android.intent.action.SCREEN_OFF------");
-////                mKeyguardManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
-////                mKeyguardLock = mKeyguardManager.newKeyguardLock("Lock 1");
-////                mKeyguardLock.disableKeyguard();
-////                startActivity(LockIntent);
-////            }
-//        }
-//
-//    };
+            if(intent.getAction().equals("android.intent.action.SCREEN_OFF")){
+//                Log.i(TAG, "----------------- android.intent.action.SCREEN_OFF------");
+//                mKeyguardManager = (KeyguardManager)context.getSystemService(Context.KEYGUARD_SERVICE);
+//                mKeyguardLock = mKeyguardManager.newKeyguardLock("Lock 1");
+//                mKeyguardLock.disableKeyguard();
+                startActivity(LockIntent);
+            }
+        }
+
+    };
 }

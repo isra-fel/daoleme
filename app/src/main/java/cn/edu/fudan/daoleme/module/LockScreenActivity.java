@@ -45,6 +45,7 @@ public class LockScreenActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.onStop();
         mContext = LockScreenActivity.this;
 		/*设置全屏，无标题*/
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -91,6 +92,9 @@ public class LockScreenActivity extends Activity {
         super.onPause();
         animArrowDrawable.stop();
     }
+
+    @Override
+    protected void onStop(){super.onStop();finish();}
 
     protected void onDestory(){
         super.onDestroy();
