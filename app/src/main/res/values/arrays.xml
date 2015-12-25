@@ -2,18 +2,18 @@
 <resources>
 
     <string-array name="poll_frequency_entries">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
+        <item>每15分钟</item>
+        <item>每30分钟</item>
+        <item>每45分钟</item>
+        <item>每60分钟</item>
     </string-array>
 
     <!-- preference value must be string, see http://stackoverflow.com/questions/3543335/preferenceactivity-gives-a-nullpointerexception-when-option-selected-from-listpr-->
     <string-array name="poll_frequency_entries_values">
         <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
+        <item>30</item>
+        <item>45</item>
+        <item>60</item>
     </string-array>
 
     <string-array name="express_company_list">
