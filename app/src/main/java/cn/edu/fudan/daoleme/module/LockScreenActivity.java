@@ -7,7 +7,6 @@ package cn.edu.fudan.daoleme.module;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +15,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -25,10 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
-import cn.edu.fudan.daoleme.adapter.DeliveryListAdapter;
+import cn.edu.fudan.daoleme.adapter.DeliveryListAdapter2;
 import cn.edu.fudan.daoleme.data.pojo.Delivery;
-import cn.edu.fudan.daoleme.service.LockScreenService;
-import cn.edu.fudan.daoleme.service.TimeRefreshService;
+
 
 public class LockScreenActivity extends Activity {
 
@@ -63,7 +60,7 @@ public class LockScreenActivity extends Activity {
         imgView_getup_arrow = (ImageView)findViewById(R.id.getup_arrow);
         animArrowDrawable = (AnimationDrawable) imgView_getup_arrow.getBackground() ;
         mListView = (ListView)findViewById(R.id.delivery_list);
-        ListAdapter adapter = new DeliveryListAdapter(this, getData(), mListView);
+        ListAdapter adapter = new DeliveryListAdapter2(this, getData(), mListView);
         mListView.setAdapter(adapter);
     }
 
