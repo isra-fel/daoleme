@@ -66,8 +66,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
             mUserAvatar.setImageResource(R.drawable.ic_action_user);
             mUserId.setText("nil");
             mUserName.setText("nil");
-            //mVMyExpress.setVisibility(View.GONE);
-            //mVResetPassword.setVisibility(View.GONE);
+            mVMyExpress.setVisibility(View.GONE);
+            mVResetPassword.setVisibility(View.GONE);
             mLogoutText.setText(getString(R.string.login));
         }
 

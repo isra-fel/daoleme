@@ -92,6 +92,15 @@ public class ReceiveFragment extends Fragment implements View.OnClickListener {
         if (selectedItem.equals("顺丰")) {
             return ExpressCompany.shunfeng.getCompanyId();
         }
+        if (selectedItem.equals("申通")) {
+            return ExpressCompany.shentong.getCompanyId();
+        }
+        if (selectedItem.equals("中通")) {
+            return ExpressCompany.zhongtong.getCompanyId();
+        }
+        if (selectedItem.equals("韵达")) {
+            return ExpressCompany.yunda.getCompanyId();
+        }
         throw new IllegalArgumentException("Should be a company name: " + selectedItem);
     }
 
