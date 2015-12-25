@@ -2,6 +2,7 @@ package cn.edu.fudan.daoleme.module;
 
 import android.app.Application;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,11 +12,14 @@ import android.widget.EditText;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.fudan.daoleme.R;
+import cn.edu.fudan.daoleme.data.pojo.User;
 import cn.edu.fudan.daoleme.net.UserClient;
 import cn.edu.fudan.daoleme.util.LoadingUtil;
+import cn.edu.fudan.daoleme.util.SessionUtil;
 import cn.edu.fudan.daoleme.util.ToastUtil;
 import cz.msebera.android.httpclient.Header;
 
@@ -41,7 +45,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     private void onRegister() {
         // TODO validate user input
-        String username = mAccount.getText().toString();
+        final String username = mAccount.getText().toString();
         String password = mPassword.getText().toString();
         String passwordRepeat = mPasswordConfirm.getText().toString();
         String email = mEMail.getText().toString();
@@ -58,6 +62,15 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 if (!isAdded()) {
                     return;
                 }
+                try {
+                    User user = new User(response.getJSONObject("returnData").getLong("currentUser"), username, "", "");
+                    SessionUtil.getSession(getActivity()).setUser(getActivity(), user);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(getActivity(), HomeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
 
             @Override
@@ -66,6 +79,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                 if (!isAdded()) {
                     return;
                 }
+                ToastUtil.toast(R.string.message_register_fail);
             }
 
         });

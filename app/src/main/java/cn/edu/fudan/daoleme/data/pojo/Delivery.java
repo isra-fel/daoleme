@@ -1,7 +1,12 @@
 package cn.edu.fudan.daoleme.data.pojo;
 
+import android.content.ContentValues;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+
+import cn.edu.fudan.daoleme.data.DeliveryDBHelper;
 
 /**
  * Created by rinnko on 2015/11/13.
@@ -84,5 +89,28 @@ public class Delivery {
     private boolean isPinned;
     private boolean isReceived;
     private List<String> state;
+
+    public ContentValues toContentValues() {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DeliveryDBHelper.KEY_ID, id);
+        contentValues.put(DeliveryDBHelper.KEY_EXPRESS, expressCompanyName);
+        contentValues.put(DeliveryDBHelper.KEY_IS_PINNED, isPinned() ? 1 : 0);
+        contentValues.put(DeliveryDBHelper.KEY_IS_RECEIVED, isReceived() ? 1 : 0);
+        //state.join('\n')
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String s : state) {
+            stringBuilder.append(s);
+            stringBuilder.append("\n");
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        contentValues.put(DeliveryDBHelper.KEY_STATE, stringBuilder.toString());
+        return contentValues;
+    }
+
+    public Delivery fromContentValues(ContentValues contentValues) {
+        Delivery delivery = new Delivery();
+        //TODO: read from contentvalues
+        return delivery;
+    }
 
 }
