@@ -86,8 +86,11 @@
     <string name="express_company_zhongtong">中通</string>
     <string name="express_company_yunda">韵达</string>
     <string name="unset">未设置</string>
+    <string name="set_done">设置完成</string>
 
 
     <string name="hint_unlock">向右滑动结束锁屏</string>
     <string name="message_no_record">无记录</string>
+
+    <string name="name_your_delivery">给快递取个好记的名字</string>
 </resources>

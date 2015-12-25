@@ -11,6 +11,12 @@
 
         <!-- company -->
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/tag" />
+
+        <TextView
             style="@style/BaseLabel"
             android:layout_marginTop="30dp"
             android:text="@string/express_company"/>
@@ -31,29 +37,35 @@
         <!-- form -->
         <TextView
             style="@style/BaseLabel"
-            android:text="@string/from"/>
+            android:text="@string/from"
+            android:visibility="gone"/>
 
         <TextView
             style="@style/TextItemContent"
-            android:id="@+id/from" />
+            android:id="@+id/from"
+            android:visibility="gone" />
 
         <!-- to -->
         <TextView
             style="@style/BaseLabel"
-            android:text="@string/to"/>
+            android:text="@string/to"
+            android:visibility="gone"/>
 
         <TextView
             style="@style/TextItemContent"
-            android:id="@+id/to" />
+            android:id="@+id/to"
+            android:visibility="gone" />
 
         <!-- receiver -->
         <TextView
             style="@style/BaseLabel"
-            android:text="@string/receiver"/>
+            android:text="@string/receiver"
+            android:visibility="gone"/>
 
         <TextView
             style="@style/TextItemContent"
-            android:id="@+id/receiver" />
+            android:id="@+id/receiver"
+            android:visibility="gone" />
 
         <!-- state -->
         <TextView

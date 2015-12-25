@@ -93,9 +93,18 @@ public class QueryDeliveryResultFragment extends DialogFragment implements View.
 
 
     private void onMark() {
+        AddTagFragment addTagFragment = new AddTagFragment();
+        Bundle arguments = new Bundle();
+        arguments.putString("deliveryId", mDelivery.getId());
+        addTagFragment.setArguments(arguments);
+        saveDelivery();
+        addTagFragment.show(getFragmentManager(), "addTag");
+        dismiss();
+    }
+
+    public void saveDelivery() {
         saveDeliveryToLocalDB();
         saveDeliveryToServer();
-        dismiss();
     }
 
     private void saveDeliveryToServer() {

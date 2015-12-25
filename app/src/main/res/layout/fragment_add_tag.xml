@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="cn.edu.fudan.daoleme.module.dialog.AddTagFragment"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="@dimen/activity_horizontal_margin">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/name_your_delivery"
+        android:labelFor="@+id/tag"
+        style="@style/BaseLabel" />
+
+    <EditText
+        style="@style/BaseEditText"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
+        android:id="@+id/tag"
+        android:gravity="center_horizontal"
+        android:inputType="text" />
+
+    <TextView
+        style="@style/BaseTextButton"
+        android:layout_marginTop="40dp"
+        android:text="@string/ok"
+        android:id="@+id/submit" />
+
+
+</LinearLayout>
