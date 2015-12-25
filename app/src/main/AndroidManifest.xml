@@ -29,6 +29,12 @@
         <activity android:name=".module.DeliveryDetailActivity" />
         <activity android:name=".module.MyDeliveryActivity" />
         <activity android:name=".module.TestActivity"></activity>
+
+        <!-- provider -->
+        <provider
+            android:authorities="cn.edu.fudan.daoleme.deliveryDB"
+            android:name=".data.DeliveryProvider"/>
+
     </application>
 
 </manifest>
