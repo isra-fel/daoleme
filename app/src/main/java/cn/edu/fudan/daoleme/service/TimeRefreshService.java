@@ -94,18 +94,6 @@ public class TimeRefreshService extends Service {
                     }
                 });
 
-                NotificationManager mn = (NotificationManager) TimeRefreshService.this.getSystemService(NOTIFICATION_SERVICE);
-                Notification.Builder builder = new Notification.Builder(TimeRefreshService.this);
-                Intent notificationIntent = new Intent(TimeRefreshService.this, HomeActivity.class);//点击跳转位置
-                PendingIntent contentIntent = PendingIntent.getActivity(TimeRefreshService.this, 0, notificationIntent, 0);
-                builder.setContentIntent(contentIntent);
-                builder.setSmallIcon(R.drawable.icon);
-                builder.setTicker(ticker); //测试通知栏标题
-                builder.setContentText(contentText); //下拉通知啦内容
-                builder.setContentTitle(contentTitle);//下拉通知栏标题
-                builder.setAutoCancel(true);
-                builder.setDefaults(Notification.DEFAULT_ALL);
-                Notification notification = builder.build();
 
             }
         },0, period);

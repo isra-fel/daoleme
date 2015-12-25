@@ -24,6 +24,7 @@ import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
 import cn.edu.fudan.daoleme.adapter.DeliveryListAdapter2;
+import cn.edu.fudan.daoleme.data.DeliveryProvider;
 import cn.edu.fudan.daoleme.data.pojo.Delivery;
 
 
@@ -66,19 +67,19 @@ public class LockScreenActivity extends Activity {
     }
 
     private List<Delivery> getData() {
-        List<Delivery> deliveryList = new ArrayList<>();
-        for ( int i = 0; i < 100; i++) {
-            Delivery delivery = new Delivery();
-            delivery.setExpressCompanyName("Company");
-            delivery.setTag("tag");
-            delivery.setIsReceived(true);
-            delivery.setIsPinned(true);
-            ArrayList<String> state = new ArrayList<>();
-            state.add("asdsadsadsd");
-            delivery.setState(state);
-            deliveryList.add(delivery);
-        }
-        return deliveryList;
+//        List<Delivery> deliveryList = new ArrayList<>();
+//        for ( int i = 0; i < 100; i++) {
+//            Delivery delivery = new Delivery();
+//            delivery.setExpressCompanyName("Company");
+//            delivery.setTag("tag");
+//            delivery.setIsReceived(true);
+//            delivery.setIsPinned(true);
+//            ArrayList<String> state = new ArrayList<>();
+//            state.add("asdsadsadsd");
+//            delivery.setState(state);
+//            deliveryList.add(delivery);
+//        }
+        return DeliveryProvider.queryAll(this.getContentResolver());
     }
 
     @Override
