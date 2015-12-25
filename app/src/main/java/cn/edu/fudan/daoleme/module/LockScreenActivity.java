@@ -16,9 +16,17 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Adapter;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
+import cn.edu.fudan.daoleme.adapter.DeliveryListAdapter;
+import cn.edu.fudan.daoleme.data.pojo.Delivery;
 import cn.edu.fudan.daoleme.service.LockScreenService;
 import cn.edu.fudan.daoleme.service.TimeRefreshService;
 
@@ -28,6 +36,7 @@ public class LockScreenActivity extends Activity {
     private SliderRelativeLayout sliderLayout = null;
     private ImageView imgView_getup_arrow; // 动画图片
     private AnimationDrawable animArrowDrawable = null;
+    private ListView mListView;
     public static int MSG_LOCK_SUCESS = 1;
 
     private static Context mContext = null ;
@@ -39,13 +48,13 @@ public class LockScreenActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        super.onStop();
         mContext = LockScreenActivity.this;
 		/*设置全屏，无标题*/
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_lock_screen);
         initViews();
-
         sliderLayout.setMainHandler(mHandler);
     }
 
@@ -54,6 +63,25 @@ public class LockScreenActivity extends Activity {
         //获得动画，并开始转动
         imgView_getup_arrow = (ImageView)findViewById(R.id.getup_arrow);
         animArrowDrawable = (AnimationDrawable) imgView_getup_arrow.getBackground() ;
+        mListView = (ListView)findViewById(R.id.delivery_list);
+        ListAdapter adapter = new DeliveryListAdapter(this, getData(), mListView);
+        mListView.setAdapter(adapter);
+    }
+
+    private List<Delivery> getData() {
+        List<Delivery> deliveryList = new ArrayList<>();
+        for ( int i = 0; i < 100; i++) {
+            Delivery delivery = new Delivery();
+            delivery.setExpressCompanyName("Company");
+            delivery.setTag("tag");
+            delivery.setIsReceived(true);
+            delivery.setIsPinned(true);
+            ArrayList<String> state = new ArrayList<>();
+            state.add("asdsadsadsd");
+            delivery.setState(state);
+            deliveryList.add(delivery);
+        }
+        return deliveryList;
     }
 
     @Override
@@ -67,6 +95,9 @@ public class LockScreenActivity extends Activity {
         super.onPause();
         animArrowDrawable.stop();
     }
+
+    @Override
+    protected void onStop(){super.onStop();finish();}
 
     protected void onDestory(){
         super.onDestroy();

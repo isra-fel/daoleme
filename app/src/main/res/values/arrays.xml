@@ -19,6 +19,9 @@
     <string-array name="express_company_list">
         <item>@string/express_company_shunfeng</item>
         <item>@string/express_company_yuantong</item>
+        <item>@string/express_company_shentong</item>
+        <item>@string/express_company_yuantong</item>
+        <item>@string/express_company_yunda</item>
     </string-array>
 
 </resources>

@@ -11,9 +11,11 @@ import android.os.IBinder;
 import android.util.Log;
 
 import cn.edu.fudan.daoleme.module.LockScreenActivity;
+import cn.edu.fudan.daoleme.util.LoadingUtil;
 import cz.msebera.android.httpclient.Header;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.edu.fudan.daoleme.R;
@@ -69,23 +71,26 @@ public class TimeRefreshService extends Service {
             @Override
             public void run() {
                 // TODO Auto-generated method stub
+                //APIClient.query("yuantong", "700074134800",
+                APIClient.query("yuantong", "700074134800", getApplicationContext(),new JsonHttpResponseHandler("UTF-8") {
 
-                APIClient.query("yuantong", "700074134800", HomeActivity.getContext(),new JsonHttpResponseHandler(){
                     @Override
-                    public void onSuccess(int statusCode, Header[] headers,
-                                          JSONObject response) {
-                        ticker = "快递更新成功";
-                        contentText = response.toString();
-                        contentTitle = "圆通";
-                        Log.e("TimeRefreshService","update success");
+                    public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                        try {
+                            //onQuerySuccess(response);
+                            ticker="成功";
+                            contentText=response.toString();
+                            contentTitle="圆通";
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
 
-                    @Override
-                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
-                        ticker = "快递更新失败";
-                        contentText = responseString;
-                        contentTitle = "圆通";
-                        Log.e("TimeRefreshService",responseString);
+                    public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
+                        //onQueryFail(throwable);
+                        ticker="失败";
+                        contentText=response.toString();
+                        contentTitle="圆通";
                     }
                 });
 
