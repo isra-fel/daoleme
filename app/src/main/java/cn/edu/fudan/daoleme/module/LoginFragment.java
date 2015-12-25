@@ -72,12 +72,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 try {
                     User user = new User(response.getJSONObject("returnData").getLong("currentUser"), username, "", "");
                     SessionUtil.getSession(getActivity()).setUser(getActivity(), user);
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    ToastUtil.toast(R.string.message_login_fail);
                 }
-                Intent intent = new Intent(getActivity(), HomeActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
             }
 
             @Override

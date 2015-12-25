@@ -1,6 +1,7 @@
 package cn.edu.fudan.daoleme.data;
 
 import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -8,6 +9,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.text.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import cn.edu.fudan.daoleme.data.pojo.Delivery;
 
 /**
  * Created by rinnko on 2015/10/20.
@@ -115,4 +122,107 @@ public class DeliveryProvider extends ContentProvider {
         return updateCount;
     }
 
+    public static Delivery queryById(ContentResolver contentResolver, String deliveryId) {
+        Delivery result = null;
+        Cursor cursor = contentResolver.query(CONTENT_URI, new String[]{DeliveryDBHelper.KEY_ID, DeliveryDBHelper.KEY_EXPRESS, DeliveryDBHelper.KEY_IS_PINNED,
+                        DeliveryDBHelper.KEY_IS_RECEIVED, DeliveryDBHelper.KEY_TAG, DeliveryDBHelper.KEY_STATE},
+                "_id = ?", new String[]{deliveryId}, "");
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                int indexId = cursor.getColumnIndex(DeliveryDBHelper.KEY_ID);
+                int indexExpress = cursor.getColumnIndex(DeliveryDBHelper.KEY_EXPRESS);
+                int indexPinned = cursor.getColumnIndex(DeliveryDBHelper.KEY_IS_PINNED);
+                int indexReceived = cursor.getColumnIndex(DeliveryDBHelper.KEY_IS_RECEIVED);
+                int indexTag = cursor.getColumnIndex(DeliveryDBHelper.KEY_TAG);
+                int indexState = cursor.getColumnIndex(DeliveryDBHelper.KEY_STATE);
+
+                Delivery delivery = new Delivery();
+                delivery.setId(cursor.getString(indexId));
+                delivery.setExpressCompanyName(cursor.getString(indexExpress));
+                delivery.setIsPinned(cursor.getInt(indexPinned) == 1);
+                delivery.setIsReceived(cursor.getInt(indexReceived) == 1);
+                delivery.setTag(cursor.getString(indexTag));
+                delivery.setState(new ArrayList<String>());
+                TextUtils.SimpleStringSplitter stringSplitter = new TextUtils.SimpleStringSplitter('\n');
+                stringSplitter.setString(cursor.getString(indexState));
+                for (String s : stringSplitter) {
+                    delivery.addState(s);
+                }
+
+                result = delivery;
+            } else {
+                result = null;
+            }
+            cursor.close();
+        }
+        return result;
+    }
+
+    public static List<Delivery> queryAll(ContentResolver contentResolver) {
+        List<Delivery> result = new ArrayList<>();
+        Cursor cursor = contentResolver.query(CONTENT_URI, new String[]{DeliveryDBHelper.KEY_ID, DeliveryDBHelper.KEY_EXPRESS, DeliveryDBHelper.KEY_IS_PINNED,
+                        DeliveryDBHelper.KEY_IS_RECEIVED, DeliveryDBHelper.KEY_TAG, DeliveryDBHelper.KEY_STATE},
+                "", new String[]{}, "");
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                int indexId = cursor.getColumnIndex(DeliveryDBHelper.KEY_ID);
+                int indexExpress = cursor.getColumnIndex(DeliveryDBHelper.KEY_EXPRESS);
+                int indexPinned = cursor.getColumnIndex(DeliveryDBHelper.KEY_IS_PINNED);
+                int indexReceived = cursor.getColumnIndex(DeliveryDBHelper.KEY_IS_RECEIVED);
+                int indexTag = cursor.getColumnIndex(DeliveryDBHelper.KEY_TAG);
+                int indexState = cursor.getColumnIndex(DeliveryDBHelper.KEY_STATE);
+                while (cursor.moveToNext()) {
+                    Delivery delivery = new Delivery();
+                    delivery.setId(cursor.getString(indexId));
+                    delivery.setExpressCompanyName(cursor.getString(indexExpress));
+                    delivery.setIsPinned(cursor.getInt(indexPinned) == 1);
+                    delivery.setIsReceived(cursor.getInt(indexReceived) == 1);
+                    delivery.setTag(cursor.getString(indexTag));
+                    delivery.setState(new ArrayList<String>());
+                    TextUtils.SimpleStringSplitter stringSplitter = new TextUtils.SimpleStringSplitter('\n');
+                    stringSplitter.setString(cursor.getString(indexState));
+                    for (String s : stringSplitter) {
+                        delivery.addState(s);
+                    }
+                    result.add(delivery);
+                }
+            }
+            cursor.close();
+        }
+        return result;
+    }
+
+    public static List<Delivery> queryAllPinned(ContentResolver contentResolver) {
+        List<Delivery> result = new ArrayList<>();
+        Cursor cursor = contentResolver.query(CONTENT_URI, new String[]{DeliveryDBHelper.KEY_ID, DeliveryDBHelper.KEY_EXPRESS, DeliveryDBHelper.KEY_IS_PINNED,
+                        DeliveryDBHelper.KEY_IS_RECEIVED, DeliveryDBHelper.KEY_TAG, DeliveryDBHelper.KEY_STATE},
+                "isPinned = ?", new String[]{}, "1");
+        if (cursor != null) {
+            if (cursor.getCount() > 0) {
+                int indexId = cursor.getColumnIndex(DeliveryDBHelper.KEY_ID);
+                int indexExpress = cursor.getColumnIndex(DeliveryDBHelper.KEY_EXPRESS);
+                int indexPinned = cursor.getColumnIndex(DeliveryDBHelper.KEY_IS_PINNED);
+                int indexReceived = cursor.getColumnIndex(DeliveryDBHelper.KEY_IS_RECEIVED);
+                int indexTag = cursor.getColumnIndex(DeliveryDBHelper.KEY_TAG);
+                int indexState = cursor.getColumnIndex(DeliveryDBHelper.KEY_STATE);
+                while (cursor.moveToNext()) {
+                    Delivery delivery = new Delivery();
+                    delivery.setId(cursor.getString(indexId));
+                    delivery.setExpressCompanyName(cursor.getString(indexExpress));
+                    delivery.setIsPinned(cursor.getInt(indexPinned) == 1);
+                    delivery.setIsReceived(cursor.getInt(indexReceived) == 1);
+                    delivery.setTag(cursor.getString(indexTag));
+                    delivery.setState(new ArrayList<String>());
+                    TextUtils.SimpleStringSplitter stringSplitter = new TextUtils.SimpleStringSplitter('\n');
+                    stringSplitter.setString(cursor.getString(indexState));
+                    for (String s : stringSplitter) {
+                        delivery.addState(s);
+                    }
+                    result.add(delivery);
+                }
+            }
+            cursor.close();
+        }
+        return result;
+    }
 }

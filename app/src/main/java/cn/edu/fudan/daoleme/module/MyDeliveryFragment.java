@@ -20,6 +20,7 @@ import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
 import cn.edu.fudan.daoleme.adapter.DeliveryListAdapter;
+import cn.edu.fudan.daoleme.data.DeliveryProvider;
 import cn.edu.fudan.daoleme.data.pojo.Delivery;
 
 /**
@@ -63,19 +64,22 @@ public class MyDeliveryFragment extends Fragment implements
     }
 
     private List<Delivery> getData() {
-        List<Delivery> deliveryList = new ArrayList<>();
-        for ( int i = 0; i < 100; i++) {
-            Delivery delivery = new Delivery();
-            delivery.setExpressCompanyName("Company");
-            delivery.setTag("tag");
-            delivery.setIsReceived(true);
-            delivery.setIsPinned(true);
-            ArrayList<String> state = new ArrayList<>();
-            state.add("asdsadsadsd");
-            delivery.setState(state);
-            deliveryList.add(delivery);
-        }
-        return deliveryList;
+        return DeliveryProvider.queryAll(getActivity().getContentResolver());
+        //TODO: getData form DB
+//        List<Delivery> deliveryList = new ArrayList<>();
+//        for ( int i = 0; i < 100; i++) {
+//            Delivery delivery = new Delivery();
+//            delivery.setExpressCompanyName("yuantong");
+//            delivery.setTag("tag");
+//            delivery.setIsReceived(true);
+//            delivery.setIsPinned(true);
+//            ArrayList<String> state = new ArrayList<>();
+//            state.add("history1");
+//            state.add("history2");
+//            delivery.setState(state);
+//            deliveryList.add(delivery);
+//        }
+//        return deliveryList;
     }
 
     private void onExitMultiSelectMode() {

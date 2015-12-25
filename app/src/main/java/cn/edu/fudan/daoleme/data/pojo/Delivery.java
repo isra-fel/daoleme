@@ -106,11 +106,4 @@ public class Delivery {
         contentValues.put(DeliveryDBHelper.KEY_STATE, stringBuilder.toString());
         return contentValues;
     }
-
-    public Delivery fromContentValues(ContentValues contentValues) {
-        Delivery delivery = new Delivery();
-        //TODO: read from contentvalues
-        return delivery;
-    }
-
 }

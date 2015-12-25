@@ -14,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 import cn.edu.fudan.daoleme.R;
+import cn.edu.fudan.daoleme.data.constant.ExpressCompany;
 import cn.edu.fudan.daoleme.data.pojo.Delivery;
 
 /**
@@ -50,10 +51,16 @@ public class DeliveryListAdapter extends ArrayAdapter<Delivery>  {
             convertView = layout;
         }
         Delivery delivery = getItem(position);
-        holder.expressCompany.setText(delivery.getExpressCompanyName());
+        holder.expressCompany.setText(ExpressCompany.valueOf(delivery.getExpressCompanyName()).getString(getContext()));
         holder.tag.setText(delivery.getTag());
-        holder.stateSummary.setText(delivery.getState().toString());
-        holder.date.setText(new Date().toString());
+        try {
+            holder.stateSummary.setText(delivery.getState().get(0));
+        } catch (IndexOutOfBoundsException e) {
+            e.printStackTrace();
+            holder.stateSummary.setText(R.string.message_no_record);
+        }
+        holder.date.setText("time");
+//        holder.date.setText(new Date().toString());
         if (!delivery.isPinned()) {
             holder.isPinned.setVisibility(View.GONE);
         }
