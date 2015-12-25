@@ -50,7 +50,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             return;
         }
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_register);
-        UserClient.signup(username, password, email, getActivity(), new JsonHttpResponseHandler("UTF-8") {
+        UserClient.register(username, password, email, getActivity(), new JsonHttpResponseHandler("UTF-8") {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

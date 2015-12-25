@@ -56,7 +56,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_login);
 
-        UserClient.signin(username, password, getActivity(), new JsonHttpResponseHandler("UTF-8") {
+        UserClient.login(username, password, getActivity(), new JsonHttpResponseHandler("UTF-8") {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

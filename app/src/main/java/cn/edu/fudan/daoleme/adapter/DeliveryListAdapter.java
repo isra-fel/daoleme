@@ -50,14 +50,14 @@ public class DeliveryListAdapter extends ArrayAdapter<Delivery>  {
             convertView = layout;
         }
         Delivery delivery = getItem(position);
-        holder.expressCompany.setText(delivery.expressCompanyName);
-        holder.tag.setText(delivery.tag);
-        holder.stateSummary.setText(delivery.state.toString());
+        holder.expressCompany.setText(delivery.getExpressCompanyName());
+        holder.tag.setText(delivery.getTag());
+        holder.stateSummary.setText(delivery.getState().toString());
         holder.date.setText(new Date().toString());
-        if (!delivery.isPinned) {
+        if (!delivery.isPinned()) {
             holder.isPinned.setVisibility(View.GONE);
         }
-        if (!delivery.isReceived) {
+        if (!delivery.isReceived()) {
             holder.isReceived.setVisibility(View.GONE);
         }
         boolean isItemChecked = mListView.isItemChecked(position);

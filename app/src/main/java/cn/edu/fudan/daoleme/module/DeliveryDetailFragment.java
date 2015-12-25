@@ -20,6 +20,7 @@ import cn.edu.fudan.daoleme.R;
 import cn.edu.fudan.daoleme.data.pojo.Delivery;
 import cn.edu.fudan.daoleme.net.DeliveryClient;
 import cn.edu.fudan.daoleme.util.LoadingUtil;
+import cn.edu.fudan.daoleme.util.SessionUtil;
 import cn.edu.fudan.daoleme.util.ToastUtil;
 import cz.msebera.android.httpclient.Header;
 
@@ -31,6 +32,7 @@ public class DeliveryDetailFragment extends Fragment {
 
     private Delivery mDelivery;
     private Menu mMenu;
+    private long userId = SessionUtil.getSession(getActivity()).getUser().getId();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,9 +42,9 @@ public class DeliveryDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_delivery_detail, container, false);
 
         TextView expressCompany = (TextView)view.findViewById(R.id.express_company);
-        expressCompany.setText(mDelivery.expressCompanyName);
+        expressCompany.setText(mDelivery.getExpressCompanyName());
         TextView deliveryId = (TextView)view.findViewById(R.id.delivery_id);
-        deliveryId.setText(mDelivery.id);
+        deliveryId.setText(mDelivery.getId());
 
         //
         // from, to, receiver
@@ -52,7 +54,7 @@ public class DeliveryDetailFragment extends Fragment {
         //
 
         ViewGroup mDeliveryState = (ViewGroup)view.findViewById(R.id.delivery_state);
-        for (String item : mDelivery.state) {
+        for (String item : mDelivery.getState()) {
             TextView textView = new TextView(getActivity());
             mDeliveryState.addView(textView);
         }
@@ -66,22 +68,24 @@ public class DeliveryDetailFragment extends Fragment {
     private Delivery getDeliveryById(String deliveryId) {
         // TODO get delivery by id
         Delivery delivery = new Delivery();
-        delivery.id = deliveryId;
-        delivery.tag = "tag";
-        delivery.expressCompanyName = "company";
-        delivery.isPinned = true;
-        delivery.isReceived = false;
-        delivery.state = new ArrayList<>();
-        delivery.state.add("2015-10-10 到达上海");
+        delivery.setId(deliveryId);
+        delivery.setTag("tag");
+        delivery.setExpressCompanyName("company");
+        delivery.setIsPinned(true);
+        delivery.setIsReceived(false);
+        ArrayList<String> state = new ArrayList<String>();
+        state.add("2015-10-10 到达上海");
+        delivery.setState(state);
+
         return delivery;
     }
 
     private void onDelete() {
 
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_delete);
-        DeliveryClient.deleteDelivery(mDelivery.id, getActivity(), new JsonHttpResponseHandler() {
+        DeliveryClient.deleteDelivery(userId, mDelivery.getId(), getActivity(), new JsonHttpResponseHandler() {
 
-            private String mDeleteId = mDelivery.id;
+            private String mDeleteId = mDelivery.getId();
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
@@ -105,16 +109,16 @@ public class DeliveryDetailFragment extends Fragment {
 
     private void onReceive() {
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_edit);
-        DeliveryClient.editDelivery(mDelivery.isPinned, !mDelivery.isReceived, getActivity(), new JsonHttpResponseHandler() {
+        DeliveryClient.receive(userId, new String[] { mDelivery.getId() }, getActivity(), new JsonHttpResponseHandler() {
 
-            private boolean mReceivedStatus = mDelivery.isReceived;
+            private boolean mReceivedStatus = mDelivery.isReceived();
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 ToastUtil.toast(R.string.message_edit_success);
                 // TODO write database
                 if (isAdded()) {
-                    mMenu.getItem(1).setIcon(mReceivedStatus ? R.drawable.ic_action_accept_light: R.drawable.ic_action_accept_active);
+                    mMenu.getItem(1).setIcon(mReceivedStatus ? R.drawable.ic_action_accept_light : R.drawable.ic_action_accept_active);
                     LoadingUtil.hideLoading(getActivity());
                 }
             }
@@ -131,16 +135,16 @@ public class DeliveryDetailFragment extends Fragment {
 
     private void onPin() {
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_edit);
-        DeliveryClient.editDelivery(!mDelivery.isPinned, mDelivery.isReceived, getActivity(), new JsonHttpResponseHandler() {
+        DeliveryClient.setPin(userId, new String[]{mDelivery.getId()}, !mDelivery.isPinned(), getActivity(), new JsonHttpResponseHandler() {
 
-            private boolean mPinnedStatus = mDelivery.isPinned;
+            private boolean mPinnedStatus = mDelivery.isPinned();
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 ToastUtil.toast(R.string.message_edit_success);
                 // TODO write database
                 if (isAdded()) {
-                    mMenu.getItem(2).setIcon(mPinnedStatus ? R.drawable.ic_action_make_available_offline_light: R.drawable.ic_action_make_available_offline_active);
+                    mMenu.getItem(2).setIcon(mPinnedStatus ? R.drawable.ic_action_make_available_offline_light : R.drawable.ic_action_make_available_offline_active);
                     LoadingUtil.hideLoading(getActivity());
                 }
             }
@@ -175,10 +179,10 @@ public class DeliveryDetailFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         mMenu = menu;
         inflater.inflate(R.menu.menu_delivery_detail, menu);
-        if (mDelivery.isPinned) {
+        if (mDelivery.isPinned()) {
             menu.getItem(2).setIcon(R.drawable.ic_action_make_available_offline_active);
         }
-        if (mDelivery.isReceived) {
+        if (mDelivery.isReceived()) {
             menu.getItem(1).setIcon(R.drawable.ic_action_accept_active);
         }
     }

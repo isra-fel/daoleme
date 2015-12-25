@@ -60,8 +60,8 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         if (session.isLogin()) {
             User user = session.getUser();
             mUserAvatar.setImageResource(R.drawable.ic_action_user);
-            mUserId.setText(String.valueOf(user.id));
-            mUserName.setText(user.name);
+            mUserId.setText(String.valueOf(user.getId()));
+            mUserName.setText(user.getName());
         } else {
             mUserAvatar.setImageResource(R.drawable.ic_action_user);
             mUserId.setText("nil");
@@ -86,7 +86,7 @@ public class MeFragment extends Fragment implements View.OnClickListener {
         final Activity activity = getActivity();
         final Session session = SessionUtil.getSession(activity);
         if (session.isLogin()) {
-            UserClient.signout(activity, new JsonHttpResponseHandler("UTF-8") {
+            UserClient.logout(activity, new JsonHttpResponseHandler("UTF-8") {
 
                 @Override
                 public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

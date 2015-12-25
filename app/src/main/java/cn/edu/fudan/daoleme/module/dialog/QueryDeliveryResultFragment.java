@@ -43,15 +43,15 @@ public class QueryDeliveryResultFragment extends DialogFragment implements View.
         View btnPin = view.findViewById(R.id.pin);
         View btnCancel = view.findViewById(R.id.cancel);
 
-        mExpressCompany.setText(mDelivery.expressCompanyName);
-        mDeliveryId.setText(mDelivery.id);
-        mTag.setText(mDelivery.tag);
+        mExpressCompany.setText(mDelivery.getExpressCompanyName());
+        mDeliveryId.setText(mDelivery.getId());
+        mTag.setText(mDelivery.getTag());
 
         btnMark.setOnClickListener(this);
         btnPin.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
 
-        for (String state : mDelivery.state) {
+        for (String state : mDelivery.getState()) {
             TextView textState = new TextView(getActivity());
             textState.setText(state);
             mDeliveryState.addView(textState);

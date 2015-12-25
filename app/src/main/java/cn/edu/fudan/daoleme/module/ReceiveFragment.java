@@ -86,11 +86,11 @@ public class ReceiveFragment extends Fragment implements View.OnClickListener {
 
         // TODO parse data to delivery
         Delivery delivery = new Delivery();
-        delivery.expressCompanyName = "company";
-        delivery.id = "123113123121231231";
-        delivery.tag = "tag";
-        delivery.state = new ArrayList<>();
-        delivery.state.add("asdfsafasdfasdfasdfsadfs");
+        delivery.setExpressCompanyName("company");
+        delivery.setId("123113123121231231");
+        delivery.setTag("tag");
+        delivery.setState(new ArrayList<String>());
+        delivery.addState("asdfsafasdfasdfasdfsadfs");
 
         if (mQueryDeliveryResultFragment == null) {
             mQueryDeliveryResultFragment = new QueryDeliveryResultFragment();

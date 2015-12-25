@@ -66,12 +66,13 @@ public class MyDeliveryFragment extends Fragment implements
         List<Delivery> deliveryList = new ArrayList<>();
         for ( int i = 0; i < 100; i++) {
             Delivery delivery = new Delivery();
-            delivery.expressCompanyName = "Company";
-            delivery.tag = "tag";
-            delivery.isReceived = true;
-            delivery.isPinned = true;
-            delivery.state = new ArrayList<>();
-            delivery.state.add("asdfasdfasdfas");
+            delivery.setExpressCompanyName("Company");
+            delivery.setTag("tag");
+            delivery.setIsReceived(true);
+            delivery.setIsPinned(true);
+            ArrayList<String> state = new ArrayList<>();
+            state.add("asdsadsadsd");
+            delivery.setState(state);
             deliveryList.add(delivery);
         }
         return deliveryList;
@@ -90,7 +91,7 @@ public class MyDeliveryFragment extends Fragment implements
             Intent intent = new Intent(getActivity(), DeliveryDetailActivity.class);
             Bundle bundle = new Bundle();
             // TODO pass express_id
-            bundle.putString("deliveryId", mAdapter.getItem(position).id);
+            bundle.putString("deliveryId", mAdapter.getItem(position).getId());
             intent.putExtras(bundle);
             startActivity(intent);
         } else {

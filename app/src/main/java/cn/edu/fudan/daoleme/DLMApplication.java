@@ -1,8 +1,11 @@
 package cn.edu.fudan.daoleme;
 
 import android.app.Application;
+import android.content.Intent;
 
 import cn.edu.fudan.daoleme.data.dao.Session;
+import cn.edu.fudan.daoleme.module.HomeActivity;
+import cn.edu.fudan.daoleme.module.LoginActivity;
 import cn.edu.fudan.daoleme.util.SessionUtil;
 import cn.edu.fudan.daoleme.util.ToastUtil;
 
@@ -20,6 +23,7 @@ public class DLMApplication extends Application {
         super.onCreate();
         mSession = new Session(this);
         ToastUtil.registerContext(this);
+        navigate();
     }
 
     public Session getSession() {
@@ -30,5 +34,15 @@ public class DLMApplication extends Application {
     public void onTerminate() {
         super.onTerminate();
         ToastUtil.unregisterContext();
+    }
+
+    private void navigate() {
+        Intent intent;
+        if (mSession.isLogin()) {
+            intent = new Intent(getApplicationContext(), HomeActivity.class);
+        } else {
+            intent = new Intent(getApplicationContext(), LoginActivity.class);
+        }
+        startActivity(intent);
     }
 }

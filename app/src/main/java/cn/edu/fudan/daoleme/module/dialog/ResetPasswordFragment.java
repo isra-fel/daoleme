@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import cn.edu.fudan.daoleme.R;
 import cn.edu.fudan.daoleme.net.UserClient;
 import cn.edu.fudan.daoleme.util.LoadingUtil;
+import cn.edu.fudan.daoleme.util.SessionUtil;
 import cn.edu.fudan.daoleme.util.ToastUtil;
 import cz.msebera.android.httpclient.Header;
 
@@ -25,6 +26,7 @@ import cz.msebera.android.httpclient.Header;
  */
 public class ResetPasswordFragment extends DialogFragment implements View.OnClickListener {
     private static final String TAG = "ResetPasswordFragment";
+    private long userId = SessionUtil.getSession(getActivity()).getUser().getId();
 
     private EditText mOldPassword, mNewPassword, mConfirmPassword;
 
@@ -55,7 +57,7 @@ public class ResetPasswordFragment extends DialogFragment implements View.OnClic
             return;
         }
         LoadingUtil.showLoading(getActivity(), R.string.message_loading_reset_password);
-        UserClient.updatePassword(newPassword, getActivity(), new JsonHttpResponseHandler("UTF-8") {
+        UserClient.changePassword(userId, oldPassword, newPassword, getActivity(), new JsonHttpResponseHandler("UTF-8") {
 
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {

@@ -21,10 +21,10 @@ public class Session {
         long userId = userPreferences.getLong(Preferences.Key.USER_ID, -1);
         if (userId != -1) {
             mUser = new User();
-            mUser.id = userId;
-            mUser.name = userPreferences.getString(Preferences.Key.USER_NAME, "");
-            mUser.email = userPreferences.getString(Preferences.Key.USER_EMAIL, "");
-            mUser.token = userPreferences.getString(Preferences.Key.USER_TOKEN, "");
+            mUser.setId(userId);
+            mUser.setName(userPreferences.getString(Preferences.Key.USER_NAME, ""));
+            mUser.setEmail(userPreferences.getString(Preferences.Key.USER_EMAIL, ""));
+            mUser.setToken(userPreferences.getString(Preferences.Key.USER_TOKEN, ""));
         }
         SharedPreferences settingPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         mSetting = new Setting();
@@ -40,10 +40,10 @@ public class Session {
     public void setUser(Context context, User user) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(Preferences.Key.USER_PREFERENCE_KEY, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putLong(Preferences.Key.USER_ID, user.id);
-        editor.putString(Preferences.Key.USER_NAME, user.name);
-        editor.putString(Preferences.Key.USER_EMAIL, user.email);
-        editor.putString(Preferences.Key.USER_TOKEN, user.token);
+        editor.putLong(Preferences.Key.USER_ID, user.getId());
+        editor.putString(Preferences.Key.USER_NAME, user.getName());
+        editor.putString(Preferences.Key.USER_EMAIL, user.getEmail());
+        editor.putString(Preferences.Key.USER_TOKEN, user.getToken());
         editor.apply();
         mUser = user;
     }
