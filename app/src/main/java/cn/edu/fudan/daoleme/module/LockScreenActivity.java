@@ -79,7 +79,7 @@ public class LockScreenActivity extends Activity {
 //            delivery.setState(state);
 //            deliveryList.add(delivery);
 //        }
-        return DeliveryProvider.queryAll(this.getContentResolver());
+        return DeliveryProvider.queryAll(LockScreenActivity.this.getContentResolver());
     }
 
     @Override

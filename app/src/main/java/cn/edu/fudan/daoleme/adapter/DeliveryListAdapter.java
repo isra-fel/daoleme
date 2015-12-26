@@ -59,7 +59,7 @@ public class DeliveryListAdapter extends ArrayAdapter<Delivery>  {
             e.printStackTrace();
             holder.stateSummary.setText(R.string.message_no_record);
         }
-        holder.date.setText("time");
+        holder.date.setText("");
 //        holder.date.setText(new Date().toString());
         if (!delivery.isPinned()) {
             holder.isPinned.setVisibility(View.GONE);
