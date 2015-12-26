@@ -10,7 +10,7 @@
 
     <!-- preference value must be string, see http://stackoverflow.com/questions/3543335/preferenceactivity-gives-a-nullpointerexception-when-option-selected-from-listpr-->
     <string-array name="poll_frequency_entries_values">
-        <item>1</item>
+        <item>15</item>
         <item>30</item>
         <item>45</item>
         <item>60</item>

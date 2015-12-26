@@ -33,7 +33,8 @@
             style="@style/BaseTextView3"
             android:layout_toRightOf="@id/user_avatar"
             android:layout_below="@id/user_name"
-            android:id="@+id/user_id" />
+            android:id="@+id/user_id"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

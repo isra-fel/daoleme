@@ -7,18 +7,21 @@
         <SwitchPreference
             android:key="open_wallpaper_notify"
             android:title="@string/open_wallpaper_notify"
+            android:defaultValue="true"
             android:summary="@string/open_wallpaper_notify_description" />
 
         <SwitchPreference
             android:key="notify_if_favorite_default"
             android:title="@string/notify_if_favorite_default"
-            android:summary="@string/notify_if_favorite_default_description"/>
+            android:defaultValue="true"
+            android:summary="无需手动添加"/>
 
         <ListPreference
             android:key="poll_frequency"
             android:title="@string/poll_frequency"
             android:summary="@string/poll_frequency_description"
             android:entries="@array/poll_frequency_entries"
+            android:defaultValue="15"
             android:entryValues="@array/poll_frequency_entries_values"/>
 
     </PreferenceCategory>

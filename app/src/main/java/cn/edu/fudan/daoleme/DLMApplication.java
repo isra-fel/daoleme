@@ -30,8 +30,8 @@ public class DLMApplication extends Application {
     }
 
     private void setIP() {
-        UserClient.setRootUrl("http://175.186.144.72:8080/Daoleme");
-        DeliveryClient.setRootUrl("http://175.186.144.72:8080/Daoleme");
+        UserClient.setRootUrl("http://175.186.52.70:8080/Daoleme");
+        DeliveryClient.setRootUrl("http://175.186.52.70:8080/Daoleme");
     }
 
     public Session getSession() {

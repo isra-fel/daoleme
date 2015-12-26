@@ -9,18 +9,18 @@
 
     <TextView
         style="@style/BaseTextView1"
-        android:id="@+id/express_company"
-        android:singleLine="true" />
-
-    <TextView
-        style="@style/BaseTextView2"
-        android:layout_below="@id/express_company"
         android:id="@+id/tag"
         android:singleLine="true" />
 
     <TextView
         style="@style/BaseTextView2"
-        android:layout_below="@id/tag"
+        android:id="@+id/express_company"
+        android:singleLine="true"
+        android:layout_below="@+id/tag" />
+
+    <TextView
+        style="@style/BaseTextView2"
+        android:layout_below="@+id/express_company"
         android:id="@+id/state_summary"
         android:singleLine="true" />
 

@@ -65,7 +65,7 @@ public class SettingFragment extends PreferenceFragment implements Preference.On
         } else if (key.equals(Preferences.Key.SETTING_NOTIFY_IF_FAVORITE_DEFAULT)) {
             setting.notifyIfFavoriteDefault = sharedPreferences.getBoolean(Preferences.Key.SETTING_NOTIFY_IF_FAVORITE_DEFAULT, false);
         } else if (key.equals(Preferences.Key.SETTING_POLL_FREQUENCY)) {
-            setting.pollFrequency = Integer.parseInt(sharedPreferences.getString(Preferences.Key.SETTING_POLL_FREQUENCY, "1"));
+            setting.pollFrequency = Integer.parseInt(sharedPreferences.getString(Preferences.Key.SETTING_POLL_FREQUENCY, "15"));
            //TimeRefreshService.setPeriod(SessionUtil.getSession(getActivity()).IsWallpaperNotifyOpen(),SessionUtil.getSession(getActivity()).getPollFrequency()*60*1000);
         }
     }
