@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import cn.edu.fudan.daoleme.R;
+import cn.edu.fudan.daoleme.data.DeliveryProvider;
 import cn.edu.fudan.daoleme.data.pojo.Delivery;
 import cn.edu.fudan.daoleme.net.DeliveryClient;
 import cn.edu.fudan.daoleme.util.LoadingUtil;
@@ -45,17 +46,13 @@ public class DeliveryDetailFragment extends Fragment {
         expressCompany.setText(mDelivery.getExpressCompanyName());
         TextView deliveryId = (TextView)view.findViewById(R.id.delivery_id);
         deliveryId.setText(mDelivery.getId());
-
-        //
-        // from, to, receiver
-        TextView mFrom = (TextView)view.findViewById(R.id.from);
-        TextView mTo = (TextView)view.findViewById(R.id.to);
-        TextView mReceiver = (TextView)view.findViewById(R.id.receiver);
-        //
+        TextView tag = (TextView)view.findViewById(R.id.tag);
+        tag.setText(mDelivery.getTag());
 
         ViewGroup mDeliveryState = (ViewGroup)view.findViewById(R.id.delivery_state);
         for (String item : mDelivery.getState()) {
             TextView textView = new TextView(getActivity());
+            textView.setText(item);
             mDeliveryState.addView(textView);
         }
 
@@ -66,18 +63,7 @@ public class DeliveryDetailFragment extends Fragment {
     }
 
     private Delivery getDeliveryById(String deliveryId) {
-        // TODO get delivery by id
-        Delivery delivery = new Delivery();
-        delivery.setId(deliveryId);
-        delivery.setTag("tag");
-        delivery.setExpressCompanyName("company");
-        delivery.setIsPinned(true);
-        delivery.setIsReceived(false);
-        ArrayList<String> state = new ArrayList<String>();
-        state.add("2015-10-10 到达上海");
-        delivery.setState(state);
-
-        return delivery;
+        return DeliveryProvider.queryById(getActivity().getContentResolver(), deliveryId);
     }
 
     private void onDelete() {

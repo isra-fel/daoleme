@@ -122,6 +122,12 @@ public class DeliveryProvider extends ContentProvider {
         return updateCount;
     }
 
+    public static void setTag(ContentResolver contentResolver, String deliveryId, String tag) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(DeliveryDBHelper.KEY_TAG, tag);
+        contentResolver.update(CONTENT_URI, contentValues, "_id = ?", new String[]{deliveryId});
+    }
+
     public static Delivery queryById(ContentResolver contentResolver, String deliveryId) {
         Delivery result = null;
         Cursor cursor = contentResolver.query(CONTENT_URI, new String[]{DeliveryDBHelper.KEY_ID, DeliveryDBHelper.KEY_EXPRESS, DeliveryDBHelper.KEY_IS_PINNED,
@@ -129,6 +135,7 @@ public class DeliveryProvider extends ContentProvider {
                 "_id = ?", new String[]{deliveryId}, "");
         if (cursor != null) {
             if (cursor.getCount() > 0) {
+                cursor.moveToNext();
                 int indexId = cursor.getColumnIndex(DeliveryDBHelper.KEY_ID);
                 int indexExpress = cursor.getColumnIndex(DeliveryDBHelper.KEY_EXPRESS);
                 int indexPinned = cursor.getColumnIndex(DeliveryDBHelper.KEY_IS_PINNED);

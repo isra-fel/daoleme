@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.loopj.android.http.JsonHttpResponseHandler;
 
@@ -25,6 +26,7 @@ import cn.edu.fudan.daoleme.data.pojo.Delivery;
 import cn.edu.fudan.daoleme.module.dialog.QueryDeliveryResultFragment;
 import cn.edu.fudan.daoleme.net.APIClient;
 import cn.edu.fudan.daoleme.util.LoadingUtil;
+import cn.edu.fudan.daoleme.util.ToastUtil;
 import cz.msebera.android.httpclient.Header;
 
 /**
@@ -73,6 +75,11 @@ public class ReceiveFragment extends Fragment implements View.OnClickListener {
                     onQuerySuccess(response);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    try {
+                        Toast.makeText(getActivity(), response.getString("message"), Toast.LENGTH_SHORT).show();
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             }
 
@@ -126,7 +133,6 @@ public class ReceiveFragment extends Fragment implements View.OnClickListener {
         // {"time":"2015-11-13 22:49:28","context":"广东省东莞市新东城公司 已发出,下一站 虎门转运中心","ftime":"2015-11-13 22:49:28"},
         // {"time":"2015-11-13 19:36:20","context":"广东省东莞市新东城公司 已打包","ftime":"2015-11-13 19:36:20"},
         // {"time":"2015-11-13 12:08:51","context":"广东省东莞市新东城公司(点击查询电话) 已揽收","ftime":"2015-11-13 12:08:51"}]}
-        // TODO parse data to delivery
         Delivery delivery = new Delivery(data.getString("com"), data.getString("nu"), "", false, false, new ArrayList<String>());
         JSONArray history = data.getJSONArray("data");
         for (int i = 0; i < history.length(); ++i) {
