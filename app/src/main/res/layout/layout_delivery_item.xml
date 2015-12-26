@@ -29,7 +29,8 @@
         android:layout_alignParentRight="true"
         android:layout_marginTop="4dp"
         android:id="@+id/date"
-        android:singleLine="true" />
+        android:singleLine="true"
+        android:visibility="gone" />
 
     <ImageView
         android:layout_width="wrap_content"

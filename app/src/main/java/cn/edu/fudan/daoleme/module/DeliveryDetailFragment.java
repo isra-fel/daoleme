@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import cn.edu.fudan.daoleme.R;
 import cn.edu.fudan.daoleme.data.DeliveryProvider;
+import cn.edu.fudan.daoleme.data.constant.ExpressCompany;
 import cn.edu.fudan.daoleme.data.pojo.Delivery;
 import cn.edu.fudan.daoleme.net.DeliveryClient;
 import cn.edu.fudan.daoleme.util.LoadingUtil;
@@ -43,7 +44,7 @@ public class DeliveryDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_delivery_detail, container, false);
 
         TextView expressCompany = (TextView)view.findViewById(R.id.express_company);
-        expressCompany.setText(mDelivery.getExpressCompanyName());
+        expressCompany.setText(ExpressCompany.valueOf(mDelivery.getExpressCompanyName()).getString(getActivity()));
         TextView deliveryId = (TextView)view.findViewById(R.id.delivery_id);
         deliveryId.setText(mDelivery.getId());
         TextView tag = (TextView)view.findViewById(R.id.tag);
